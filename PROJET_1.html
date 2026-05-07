@@ -172,6 +172,7 @@
     .tab-btn.t1.active { color:#2d7a3a; }
     .tab-btn.t2.active { color:#8b6914; }
     .tab-btn.t3.active { color:#1a3e8a; }
+    @keyframes spin { to { transform: rotate(360deg); } }
     .tab-btn.t4.active { color:#7c3aed; }
     .tab-btn.t5.active { color:#0e7490; }
 
@@ -664,91 +665,420 @@ function switchTab(name, btn){
 }
 
 // ══════════════════════════════════════════════════════════════
-// PLANS DE LOTISSEMENT (DWG/DXF)
+// PLANS DE LOTISSEMENT — EXTRACTION VERS LOTS & TERRAINS
 // ══════════════════════════════════════════════════════════════
 let plans = JSON.parse(localStorage.getItem("plans_dwg")||"[]");
-
 function savePlans(){ localStorage.setItem("plans_dwg", JSON.stringify(plans)); }
 
-function handlePlanFiles(files){
-  Array.from(files).forEach(file=>{
-    const ext = file.name.split(".").pop().toLowerCase();
-    if(!["dwg","dxf"].includes(ext)){
-      alert("❌ Format non accepté : " + file.name + "\nSeuls les fichiers .dwg et .dxf sont autorisés.");
-      return;
-    }
-    const reader = new FileReader();
-    reader.onload = function(e){
-      const plan = {
-        id: "P" + Date.now() + Math.floor(Math.random()*1000),
-        nom: file.name,
-        taille: file.size,
-        ext: ext.toUpperCase(),
-        date: new Date().toLocaleDateString("fr-FR"),
-        dataUrl: e.target.result,
-        description: ""
-      };
-      plans.push(plan);
-      savePlans();
-      renderPlans();
-    };
-    reader.readAsDataURL(file);
-  });
-  document.getElementById("plan-file-input").value = "";
-}
-
-function deletePlan(id){
-  if(!confirm("Supprimer ce plan ?")) return;
-  plans = plans.filter(p=>p.id!==id);
-  savePlans();
-  renderPlans();
-}
-
-function downloadPlan(id){
-  const p = plans.find(x=>x.id===id);
-  if(!p) return;
-  const a = document.createElement("a");
-  a.href = p.dataUrl;
-  a.download = p.nom;
-  a.click();
-}
-
-function formatSize(bytes){
+// ── Taille lisible ─────────────────────────────────────────────
+function fileSizeStr(bytes){
+  if(!bytes) return "";
   if(bytes < 1024) return bytes + " o";
   if(bytes < 1024*1024) return (bytes/1024).toFixed(1) + " Ko";
   return (bytes/(1024*1024)).toFixed(2) + " Mo";
 }
 
-function renderPlans(){
-  const container = document.getElementById("plans-container");
-  document.getElementById("plans-count").textContent = plans.length + " plan(s)";
-  if(!plans.length){
-    container.innerHTML = `<div class="plans-empty"><div class="e-icon">📐</div><p>Aucun plan téléversé pour l'instant.<br>Glissez vos fichiers DWG / DXF dans la zone ci-dessus.</p></div>`;
-    return;
-  }
-  container.innerHTML = `<div class="plans-grid">${plans.map(p=>`
-    <div class="plan-card">
-      <div class="plan-card-header">
-        <div class="plan-icon">${p.ext==="DXF"?"📄":"🗺"}</div>
-        <div>
-          <div class="plan-card-name">${esc(p.nom)}</div>
-          <div class="plan-card-meta">${p.ext} · ${formatSize(p.taille)} · Ajouté le ${p.date}</div>
-        </div>
-      </div>
-      <div class="plan-card-footer">
-        <a class="btn-dwg" onclick="downloadPlan('${p.id}')" href="javascript:void(0)">⬇ Télécharger ${p.ext}</a>
-        <button class="btn-del-plan" onclick="deletePlan('${p.id}')">🗑 Supprimer</button>
-      </div>
-    </div>`).join("")}</div>`;
+// ── Upload DWG/DXF ────────────────────────────────────────────
+function handlePlanFiles(files){
+  Array.from(files).forEach(file=>{
+    const ext = file.name.split(".").pop().toLowerCase();
+    if(!["dwg","dxf"].includes(ext)){
+      alert("❌ Format non accepté : "+file.name+"\nSeuls .dwg et .dxf sont autorisés.");
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = e=>{
+      plans.push({
+        id: "P"+Date.now()+Math.floor(Math.random()*1000),
+        nom: file.name, taille: file.size,
+        ext: ext.toUpperCase(),
+        date: new Date().toLocaleDateString("fr-FR"),
+        dataUrl: e.target.result,
+        lotsExtraits: []
+      });
+      savePlans(); renderPlans();
+    };
+    reader.readAsDataURL(file);
+  });
+  document.getElementById("plan-file-input").value="";
 }
 
-// Drag & drop support
-document.addEventListener("DOMContentLoaded", function(){
+function deletePlan(id){
+  if(!confirm("Supprimer ce plan ?")) return;
+  plans = plans.filter(p=>p.id!==id);
+  savePlans(); renderPlans();
+}
+function downloadPlan(id){
+  const p = plans.find(x=>x.id===id); if(!p) return;
+  const a = document.createElement("a"); a.href=p.dataUrl; a.download=p.nom; a.click();
+}
+
+// ── Rendu liste des plans ─────────────────────────────────────
+function renderPlans(){
+  const container = document.getElementById("plans-container");
+  document.getElementById("plans-count").textContent = plans.length+" plan(s)";
+  if(!plans.length){
+    container.innerHTML=`<div class="plans-empty"><div class="e-icon">📐</div><p>Aucun plan téléversé.<br>Glissez vos fichiers DWG / DXF ci-dessus.</p></div>`;
+    return;
+  }
+  container.innerHTML=`<div class="plans-grid">${plans.map(p=>{
+    const nb = p.lotsExtraits?.length||0;
+    return `<div class="plan-card">
+      <div class="plan-card-header">
+        <div class="plan-icon">${p.ext==="DXF"?"📄":"🗺"}</div>
+        <div style="flex:1">
+          <div class="plan-card-name">${esc(p.nom)}</div>
+          <div class="plan-card-meta">${p.ext} · ${fileSizeStr(p.taille)} · ${p.date}</div>
+        </div>
+      </div>
+      <div style="padding:10px 18px;background:#f0fdfe;border-bottom:1px solid #cffafe;display:flex;align-items:center;gap:8px;">
+        <span style="font-size:12px;color:#0891b2;font-weight:600;">
+          ${nb>0?`✅ ${nb} lot(s) extrait(s) et enregistré(s)`:`⚠️ Aucun lot extrait`}
+        </span>
+      </div>
+      <div class="plan-card-footer" style="flex-wrap:wrap;gap:6px;">
+        <button class="btn-dwg" onclick="openExtract('${p.id}')">🏗 Extraire les lots</button>
+        <a class="btn-dwg" style="background:linear-gradient(135deg,#475569,#334155)" onclick="downloadPlan('${p.id}')" href="javascript:void(0)">⬇ Télécharger</a>
+        <button class="btn-del-plan" onclick="deletePlan('${p.id}')">🗑</button>
+      </div>
+    </div>`;
+  }).join("")}</div>`;
+}
+
+// ══════════════════════════════════════════════════════════════
+// MODAL EXTRACTION LOTS
+// ══════════════════════════════════════════════════════════════
+let _extractPlanId = null;
+let _extractRows = [];  // lots en cours de saisie
+
+function openExtract(planId){
+  _extractPlanId = planId;
+  const plan = plans.find(p=>p.id===planId);
+  document.getElementById("extract-plan-name").textContent = "Plan : "+plan.nom;
+  _extractRows = (plan.lotsExtraits||[]).map(l=>({...l}));
+  renderExtractBody();
+  document.getElementById("extract-overlay").style.display="flex";
+}
+function closeExtract(){
+  document.getElementById("extract-overlay").style.display="none";
+  _extractPlanId=null; _extractRows=[];
+}
+
+function renderExtractBody(){
+  const body = document.getElementById("extract-body");
+  const plan = plans.find(p=>p.id===_extractPlanId);
+  const nbAlreadyInLots = _extractRows.filter(r=>r._savedId).length;
+
+  body.innerHTML=`
+  <!-- Onglets méthode -->
+  <div style="display:flex;gap:8px;margin-bottom:20px;border-bottom:2px solid #e5e7eb;padding-bottom:0;">
+    <button id="meth-tab-manual" onclick="showMethodTab('manual')" style="padding:8px 18px;border:none;background:transparent;font-weight:700;font-size:13px;cursor:pointer;border-bottom:2px solid #0891b2;color:#0891b2;font-family:inherit;margin-bottom:-2px;">✏️ Saisie manuelle</button>
+    <button id="meth-tab-csv"    onclick="showMethodTab('csv')"    style="padding:8px 18px;border:none;background:transparent;font-weight:700;font-size:13px;cursor:pointer;border-bottom:2px solid transparent;color:#888;font-family:inherit;margin-bottom:-2px;">📊 Import CSV</button>
+    <button id="meth-tab-ai"     onclick="showMethodTab('ai')"     style="padding:8px 18px;border:none;background:transparent;font-weight:700;font-size:13px;cursor:pointer;border-bottom:2px solid transparent;color:#888;font-family:inherit;margin-bottom:-2px;">🤖 Saisie assistée par IA</button>
+  </div>
+
+  <!-- Méthode : saisie manuelle -->
+  <div id="meth-manual">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+      <span style="font-size:13px;font-weight:700;color:#1a1a2e;">Lots à importer (${_extractRows.length})</span>
+      <div style="display:flex;gap:8px;">
+        <button onclick="addExtractRow()" style="padding:7px 14px;background:linear-gradient(135deg,#1a3e8a,#2563eb);color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">+ Ajouter un lot</button>
+        <button onclick="addMultipleRows()" style="padding:7px 14px;background:#fff;border:1.5px solid #e5e7eb;color:#555;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">++ Ajouter plusieurs</button>
+      </div>
+    </div>
+    <div id="extract-rows-container" style="max-height:380px;overflow-y:auto;">
+      ${renderExtractRows()}
+    </div>
+  </div>
+
+  <!-- Méthode : CSV -->
+  <div id="meth-csv" style="display:none;">
+    <div style="background:#f8fafc;border-radius:12px;padding:20px;border:1.5px dashed #cbd5e1;text-align:center;">
+      <div style="font-size:32px;margin-bottom:10px;">📊</div>
+      <p style="font-size:14px;font-weight:700;color:#1a1a2e;margin-bottom:6px;">Importez un fichier CSV exporté depuis AutoCAD</p>
+      <p style="font-size:12px;color:#888;margin-bottom:16px;">Colonnes attendues : <code style="background:#e5e7eb;padding:2px 6px;border-radius:4px;">numero_lot, ilot, superficie, zone, utilisation, statut, prix</code></p>
+      <label style="display:inline-flex;align-items:center;gap:6px;padding:10px 22px;background:linear-gradient(135deg,#0891b2,#0e7490);color:#fff;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;">
+        📥 Choisir un fichier CSV
+        <input type="file" accept=".csv" style="display:none;" onchange="parseCsvIntoExtract(this)"/>
+      </label>
+      <div style="margin-top:12px;">
+        <a href="javascript:downloadSampleCSV()" style="font-size:12px;color:#0891b2;text-decoration:underline;">⬇ Télécharger le modèle CSV</a>
+      </div>
+    </div>
+    <div id="csv-preview" style="margin-top:16px;"></div>
+  </div>
+
+  <!-- Méthode : IA -->
+  <div id="meth-ai" style="display:none;">
+    <div style="background:#faf5ff;border-radius:12px;padding:20px;border:1.5px solid #e9d5ff;">
+      <p style="font-size:13px;font-weight:700;color:#6d28d9;margin-bottom:8px;">🤖 Génération assistée par IA</p>
+      <p style="font-size:12px;color:#555;margin-bottom:14px;">Décrivez votre lotissement et l'IA va générer automatiquement la liste des lots à importer.</p>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <textarea id="ai-prompt" rows="4" placeholder="Ex: Lotissement de 24 lots répartis en 4 îlots (A, B, C, D). Lots de type villa avec superficies entre 150 et 300 m², zone R+2, prix entre 350 000 et 600 000 MAD..." style="padding:12px;border:1.5px solid #e9d5ff;border-radius:10px;font-family:inherit;font-size:13px;resize:vertical;width:100%;outline:none;"></textarea>
+        <button onclick="generateLotsFromAI()" style="padding:10px 20px;background:linear-gradient(135deg,#7c3aed,#6d28d9);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;align-self:flex-start;">✨ Générer les lots</button>
+      </div>
+      <div id="ai-status" style="margin-top:12px;"></div>
+    </div>
+    <div id="ai-preview" style="margin-top:16px;max-height:300px;overflow-y:auto;"></div>
+  </div>
+
+  <!-- Pied : bouton d'enregistrement vers Lots & Terrains -->
+  <div style="margin-top:20px;padding-top:16px;border-top:2px solid #e5e7eb;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+    <div style="font-size:13px;color:#555;">
+      <b style="color:#1a1a2e;">${_extractRows.length}</b> lot(s) en attente ·
+      <b style="color:#2d7a3a;">${nbAlreadyInLots}</b> déjà enregistré(s)
+    </div>
+    <div style="display:flex;gap:8px;">
+      <button onclick="closeExtract()" style="padding:10px 20px;background:#fff;border:1.5px solid #e5e7eb;color:#666;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;">Fermer</button>
+      <button onclick="confirmImportLots()" style="padding:10px 24px;background:linear-gradient(135deg,#1a3e8a,#2563eb);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 3px 10px rgba(26,62,138,.3);">
+        ✅ Enregistrer tous les lots dans Lots &amp; Terrains (${_extractRows.length})
+      </button>
+    </div>
+  </div>`;
+}
+
+function showMethodTab(tab){
+  ["manual","csv","ai"].forEach(t=>{
+    const el = document.getElementById("meth-"+t);
+    const btn = document.getElementById("meth-tab-"+t);
+    if(el) el.style.display = (t===tab)?"block":"none";
+    if(btn){
+      btn.style.borderBottomColor = (t===tab)?"#0891b2":"transparent";
+      btn.style.color = (t===tab)?"#0891b2":"#888";
+    }
+  });
+}
+
+// ── Lignes de saisie manuelle ──────────────────────────────────
+function renderExtractRows(){
+  if(!_extractRows.length) return `<div style="text-align:center;padding:30px;color:#aaa;font-size:13px;">Cliquez sur "+ Ajouter un lot" pour commencer</div>`;
+  const header=`<div style="display:grid;grid-template-columns:80px 80px 90px 90px 130px 120px 110px 36px;gap:6px;padding:6px 8px;background:#f1f5f9;border-radius:8px;font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;min-width:760px;">
+    <span>N° Lot</span><span>Îlot</span><span>Superf.(m²)</span><span>Zone</span><span>Utilisation</span><span>Statut</span><span>Prix (MAD)</span><span></span>
+  </div>`;
+  const rows=_extractRows.map((r,i)=>`
+    <div style="display:grid;grid-template-columns:80px 80px 90px 90px 130px 120px 110px 36px;gap:6px;padding:4px 8px;align-items:center;border-bottom:1px solid #f1f5f9;min-width:760px;">
+      <input value="${esc(r.numero_lot||"")}" oninput="_extractRows[${i}].numero_lot=this.value" placeholder="Ex: 01" style="${inpS()}"/>
+      <input value="${esc(r.ilot||"")}" oninput="_extractRows[${i}].ilot=this.value" placeholder="A" style="${inpS()}"/>
+      <input type="number" value="${r.superficie||""}" oninput="_extractRows[${i}].superficie=Number(this.value)" placeholder="m²" style="${inpS()}"/>
+      <input value="${esc(r.zone||"")}" oninput="_extractRows[${i}].zone=this.value" placeholder="R+2" style="${inpS()}"/>
+      <select onchange="_extractRows[${i}].utilisation=this.value" style="${inpS()}font-size:11px;">
+        ${UTILISATION_OPT.map(o=>`<option value="${esc(o)}" ${r.utilisation===o?"selected":""}>${esc(o)}</option>`).join("")}
+      </select>
+      <select onchange="_extractRows[${i}].statut=this.value" style="${inpS()}font-size:11px;">
+        ${STATUT_OPT.map(o=>`<option value="${esc(o)}" ${(r.statut||"Disponible")===o?"selected":""}>${esc(o)}</option>`).join("")}
+      </select>
+      <input type="number" value="${r.prix||""}" oninput="_extractRows[${i}].prix=Number(this.value)" placeholder="MAD" style="${inpS()}"/>
+      <button onclick="removeExtractRow(${i})" style="width:28px;height:28px;background:#fef2f2;border:1px solid #fde8e8;border-radius:6px;color:#c0392b;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;">×</button>
+    </div>`).join("");
+  return `<div style="overflow-x:auto;">${header}${rows}</div>`;
+}
+function inpS(){ return "padding:5px 8px;border:1.5px solid #e5e7eb;border-radius:6px;font-size:12px;font-family:inherit;width:100%;outline:none;"; }
+
+function addExtractRow(){
+  _extractRows.push({ numero_lot:"", ilot:"", superficie:0, zone:"", utilisation: UTILISATION_OPT[0], statut:"Disponible", prix:0 });
+  refreshExtractRows();
+}
+function addMultipleRows(){
+  const n = parseInt(prompt("Combien de lots voulez-vous ajouter ?","10")||"0");
+  if(!n||n<1) return;
+  const ilotBase = prompt("Îlot de base (ex: A) :","A")||"";
+  for(let i=1;i<=n;i++){
+    _extractRows.push({ numero_lot:String(i).padStart(2,"0"), ilot:ilotBase, superficie:0, zone:"", utilisation:UTILISATION_OPT[0], statut:"Disponible", prix:0 });
+  }
+  refreshExtractRows();
+}
+function removeExtractRow(i){ _extractRows.splice(i,1); refreshExtractRows(); }
+function refreshExtractRows(){
+  const c = document.getElementById("extract-rows-container");
+  if(c) c.innerHTML = renderExtractRows();
+  // Mettre à jour le compteur dans le pied
+  const footer = document.querySelector("#extract-body [style*='border-top:2px']");
+  if(footer){
+    footer.querySelector("div:first-child").innerHTML = `<b style="color:#1a1a2e;">${_extractRows.length}</b> lot(s) en attente · <b style="color:#2d7a3a;">${_extractRows.filter(r=>r._savedId).length}</b> déjà enregistré(s)`;
+    const btn = footer.querySelector("button:last-child");
+    if(btn) btn.textContent=`✅ Enregistrer tous les lots dans Lots & Terrains (${_extractRows.length})`;
+  }
+}
+
+// ── Import CSV ────────────────────────────────────────────────
+function parseCsvIntoExtract(input){
+  const file = input.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e=>{
+    const lines = e.target.result.split(/\r?\n/).filter(l=>l.trim());
+    if(lines.length<2){ alert("CSV vide ou invalide."); return; }
+    const headers = lines[0].split(/[;,]/).map(h=>h.trim().toLowerCase().replace(/"/g,""));
+    const col = k => headers.indexOf(k);
+    const parsed=[];
+    for(let i=1;i<lines.length;i++){
+      const vals = lines[i].split(/[;,]/).map(v=>v.trim().replace(/^"|"$/g,""));
+      const get = k=>{ const idx=col(k); return idx>=0?vals[idx]||"":""; };
+      const lot={
+        numero_lot: get("numero_lot")||get("lot")||get("n_lot")||String(i),
+        ilot:       get("ilot")||get("bloc")||"A",
+        superficie: Number(get("superficie")||get("surface")||0),
+        zone:       get("zone")||"",
+        utilisation:get("utilisation")||get("usage")||UTILISATION_OPT[0],
+        statut:     get("statut")||"Disponible",
+        prix:       Number(get("prix")||0)
+      };
+      if(!UTILISATION_OPT.includes(lot.utilisation)) lot.utilisation=UTILISATION_OPT[0];
+      if(!STATUT_OPT.includes(lot.statut)) lot.statut="Disponible";
+      parsed.push(lot);
+    }
+    _extractRows = parsed;
+    document.getElementById("csv-preview").innerHTML=`<div style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;padding:14px 18px;font-size:13px;color:#166534;font-weight:600;">✅ ${parsed.length} lots détectés dans le CSV — Vérifiez puis cliquez sur "Enregistrer".</div>`;
+    // Basculer sur l'onglet manuel pour permettre la vérification
+    showMethodTab("manual");
+    document.getElementById("extract-rows-container").innerHTML=renderExtractRows();
+    refreshExtractRows();
+  };
+  reader.readAsText(file,"UTF-8");
+  input.value="";
+}
+
+// ── Télécharger modèle CSV ────────────────────────────────────
+function downloadSampleCSV(){
+  const rows=["numero_lot,ilot,superficie,zone,utilisation,statut,prix",
+    "01,A,200,R+2,Habitat individuel,Disponible,450000",
+    "02,A,180,R+2,Habitat individuel,Disponible,400000",
+    "03,B,250,R+2,Habitat collectif,Disponible,500000"];
+  const blob=new Blob([rows.join("\n")],{type:"text/csv"});
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="modele_lots.csv"; a.click();
+}
+
+// ── Génération par IA (Claude API) ───────────────────────────
+async function generateLotsFromAI(){
+  const prompt = document.getElementById("ai-prompt").value.trim();
+  if(!prompt){ alert("Veuillez décrire votre lotissement."); return; }
+  const status = document.getElementById("ai-status");
+  const preview = document.getElementById("ai-preview");
+  status.innerHTML=`<div style="display:flex;align-items:center;gap:10px;color:#7c3aed;font-size:13px;font-weight:600;padding:10px;background:#faf5ff;border-radius:8px;">
+    <span style="animation:spin 1s linear infinite;display:inline-block">⏳</span> L'IA génère les lots…
+  </div>`;
+  preview.innerHTML="";
+  try{
+    const res = await fetch("https://api.anthropic.com/v1/messages",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        model:"claude-sonnet-4-20250514",
+        max_tokens:1000,
+        system:`Tu es un expert en lotissement immobilier marocain. À partir de la description d'un lotissement, génère UNIQUEMENT un tableau JSON valide (sans markdown, sans backticks, sans texte avant ou après) représentant les lots.
+Format JSON attendu (tableau) :
+[{"numero_lot":"01","ilot":"A","superficie":200,"zone":"R+2","utilisation":"Habitat individuel","statut":"Disponible","prix":450000},...]
+Utilisation possible : ${UTILISATION_OPT.join(", ")}
+Statut possible : ${STATUT_OPT.join(", ")}
+Réponds SEULEMENT avec le JSON, rien d'autre.`,
+        messages:[{role:"user",content:prompt}]
+      })
+    });
+    const data = await res.json();
+    const text = (data.content||[]).map(b=>b.text||"").join("").trim();
+    let parsed;
+    try{ parsed = JSON.parse(text); }
+    catch(e){
+      const match = text.match(/\[[\s\S]*\]/);
+      if(!match) throw new Error("JSON introuvable dans la réponse IA.");
+      parsed = JSON.parse(match[0]);
+    }
+    if(!Array.isArray(parsed)||!parsed.length) throw new Error("Aucun lot généré.");
+    parsed.forEach(l=>{
+      if(!UTILISATION_OPT.includes(l.utilisation)) l.utilisation=UTILISATION_OPT[0];
+      if(!STATUT_OPT.includes(l.statut)) l.statut="Disponible";
+    });
+    _extractRows = parsed;
+    status.innerHTML=`<div style="color:#166534;font-size:13px;font-weight:600;padding:10px;background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:8px;">✅ ${parsed.length} lots générés ! Vérifiez et corrigez si nécessaire.</div>`;
+    showMethodTab("manual");
+    document.getElementById("extract-rows-container").innerHTML=renderExtractRows();
+    refreshExtractRows();
+  }catch(err){
+    status.innerHTML=`<div style="color:#c0392b;font-size:13px;font-weight:600;padding:10px;background:#fef2f2;border:1.5px solid #fde8e8;border-radius:8px;">❌ Erreur : ${esc(err.message)}</div>`;
+  }
+}
+
+// ── Confirmation : enregistrer dans Lots & Terrains ───────────
+function confirmImportLots(){
+  const invalides = _extractRows.filter(r=>!r.numero_lot||!r.ilot||!r.superficie);
+  if(invalides.length){
+    alert(`⚠️ ${invalides.length} lot(s) ont des données manquantes (N° lot, Îlot ou Superficie obligatoires).\nVeuillez compléter avant d'enregistrer.`);
+    return;
+  }
+  const plan = plans.find(p=>p.id===_extractPlanId); if(!plan) return;
+
+  let nouveau=0, mis_a_jour=0;
+  _extractRows.forEach(row=>{
+    // Chercher si ce lot existe déjà (même numero_lot + ilot)
+    const existing = lots.find(l=>l.numero_lot===row.numero_lot && l.ilot===row.ilot);
+    if(existing){
+      Object.assign(existing,{
+        superficie: row.superficie||existing.superficie,
+        zone: row.zone||existing.zone,
+        utilisation: row.utilisation||existing.utilisation,
+        statut: row.statut||existing.statut,
+        prix: row.prix||existing.prix,
+        plan_source: plan.nom
+      });
+      row._savedId = existing.id;
+      mis_a_jour++;
+    } else {
+      const newId = genId("L");
+      lots.push({
+        id: newId,
+        numero_lot: row.numero_lot,
+        ilot: row.ilot,
+        superficie: row.superficie,
+        zone: row.zone||"",
+        utilisation: row.utilisation||UTILISATION_OPT[0],
+        statut: row.statut||"Disponible",
+        prix: row.prix||0,
+        plan_source: plan.nom
+      });
+      row._savedId = newId;
+      nouveau++;
+    }
+  });
+
+  // Sauvegarder les lots extraits dans le plan
+  plan.lotsExtraits = _extractRows.map(r=>({...r}));
+  savePlans();
+  saveData(); renderAll();
+
+  // Feedback
+  const body = document.getElementById("extract-body");
+  const msg = document.createElement("div");
+  msg.style.cssText="position:sticky;top:0;z-index:10;background:linear-gradient(135deg,#dcfce7,#bbf7d0);border:1.5px solid #86efac;border-radius:12px;padding:16px 20px;margin-bottom:16px;font-size:14px;font-weight:700;color:#166534;display:flex;align-items:center;gap:10px;";
+  msg.innerHTML=`✅ Importation réussie ! <span style="font-weight:400">${nouveau} nouveau(x) lot(s) créé(s), ${mis_a_jour} mis à jour dans Lots &amp; Terrains.</span>`;
+  body.insertBefore(msg, body.firstChild);
+  renderPlans();
+  setTimeout(()=>msg.remove(),5000);
+}
+
+// ── Import CSV global (hors modal) ────────────────────────────
+function importLotsCSV(input){
+  const file = input.files[0]; if(!file) return;
+  _extractPlanId = plans[0]?.id || null;
+  if(!_extractPlanId){
+    alert("Veuillez d'abord téléverser un plan DWG pour associer ce CSV.");
+    input.value=""; return;
+  }
+  document.getElementById("extract-plan-name").textContent="Plan : "+plans[0].nom;
+  document.getElementById("extract-overlay").style.display="flex";
+  _extractRows = [];
+  renderExtractBody();
+  showMethodTab("csv");
+  // Lancer le parsing
+  const fakeInput={files:[file]}; parseCsvIntoExtract(fakeInput);
+  input.value="";
+}
+
+// ── Drag & drop + init ────────────────────────────────────────
+document.addEventListener("DOMContentLoaded",function(){
   const dz = document.getElementById("plan-drop-zone");
   if(!dz) return;
-  dz.addEventListener("dragover", e=>{ e.preventDefault(); dz.style.borderColor="#0891b2"; dz.style.background="#e0f7fa"; });
-  dz.addEventListener("dragleave", ()=>{ dz.style.borderColor="#a5f3fc"; dz.style.background="#f0fdfe"; });
-  dz.addEventListener("drop", e=>{ e.preventDefault(); dz.style.borderColor="#a5f3fc"; dz.style.background="#f0fdfe"; handlePlanFiles(e.dataTransfer.files); });
+  dz.addEventListener("dragover",e=>{ e.preventDefault(); dz.style.borderColor="#0891b2"; dz.style.background="#e0f7fa"; });
+  dz.addEventListener("dragleave",()=>{ dz.style.borderColor="#a5f3fc"; dz.style.background="#f0fdfe"; });
+  dz.addEventListener("drop",e=>{ e.preventDefault(); dz.style.borderColor="#a5f3fc"; dz.style.background="#f0fdfe"; handlePlanFiles(e.dataTransfer.files); });
   renderPlans();
 });
 
@@ -1782,4 +2112,3 @@ function gdriveRestore(){
 </script>
 </body>
 </html>
-
