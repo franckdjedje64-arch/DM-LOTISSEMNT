@@ -173,6 +173,31 @@
     .tab-btn.t2.active { color:#8b6914; }
     .tab-btn.t3.active { color:#1a3e8a; }
     .tab-btn.t4.active { color:#7c3aed; }
+    .tab-btn.t5.active { color:#0e7490; }
+
+    /* ── Plans DWG ── */
+    .plans-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px; }
+    .plan-card { background:#fff;border-radius:14px;box-shadow:0 4px 16px rgba(0,0,0,.07);overflow:hidden;border:1px solid #cffafe;transition:transform .15s,box-shadow .15s; }
+    .plan-card:hover { transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.1); }
+    .plan-card-header { background:linear-gradient(135deg,#ecfeff,#cffafe);padding:16px 18px;border-bottom:1px solid #a5f3fc;display:flex;align-items:center;gap:12px; }
+    .plan-icon { width:44px;height:44px;background:linear-gradient(135deg,#0891b2,#0e7490);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 3px 8px rgba(8,145,178,.3); }
+    .plan-card-name { font-size:14px;font-weight:700;color:#0c4a6e;font-family:'Playfair Display',Georgia,serif;flex:1;word-break:break-word; }
+    .plan-card-meta { font-size:11px;color:#0891b2;margin-top:2px; }
+    .plan-card-body { padding:14px 18px;display:flex;flex-direction:column;gap:8px; }
+    .plan-card-desc { font-size:12px;color:#555;line-height:1.5; }
+    .plan-card-footer { padding:12px 18px;border-top:1px solid #f0f0f0;display:flex;gap:8px;align-items:center; }
+    .btn-dwg { display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:linear-gradient(135deg,#0891b2,#0e7490);color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 3px 8px rgba(8,145,178,.3);text-decoration:none;transition:opacity .15s; }
+    .btn-dwg:hover { opacity:.88; }
+    .btn-del-plan { background:#fef2f2;border:1.5px solid #fde8e8;color:#c0392b;padding:7px 12px;font-size:11px;border-radius:8px;cursor:pointer;font-family:inherit;font-weight:600; }
+    .drop-zone-plan { border:2px dashed #a5f3fc;border-radius:12px;padding:28px 20px;text-align:center;color:#0891b2;background:#f0fdfe;cursor:pointer;transition:all .2s;position:relative;margin-top:8px; }
+    .drop-zone-plan:hover { border-color:#0891b2;background:#e0f7fa; }
+    .drop-zone-plan input[type=file] { position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%; }
+    .drop-zone-plan .dz-icon { font-size:32px;margin-bottom:8px; }
+    .drop-zone-plan p { font-size:13px;font-weight:600;margin-bottom:4px; }
+    .drop-zone-plan small { font-size:11px;color:#0891b2;opacity:.7; }
+    .plans-empty { background:#fff;border-radius:14px;padding:48px;text-align:center;color:#94a3b8;box-shadow:0 4px 16px rgba(0,0,0,.05); }
+    .plans-empty .e-icon { font-size:48px;margin-bottom:12px; }
+    .plans-empty p { font-size:14px; }
 
     /* ── Contenu ── */
     #content { max-width:1200px;margin:0 auto;padding:24px 20px; }
@@ -412,10 +437,11 @@
         <div class="stat-box"><div class="val" id="s-achet" style="color:#fbbf24">0</div><div class="lbl">Acheteurs</div></div>
       </div>
     </div>
-    <div id="tabs">
-      <button class="tab-btn t1 active" onclick="switchTab('principal',this)">📋 Tableau Principal</button>
-      <button class="tab-btn t2" onclick="switchTab('acheteurs',this)">👤 Acheteurs</button>
-      <button class="tab-btn t3" onclick="switchTab('lots',this)">🏗 Lots &amp; Terrains</button>
+    <div id="tabs" style="display:flex;flex-direction:row;flex-wrap:nowrap;gap:4px;overflow-x:auto;">
+      <button class="tab-btn t1 active" onclick="switchTab('principal',this)" style="white-space:nowrap;">📋 Tableau Principal</button>
+      <button class="tab-btn t2" onclick="switchTab('acheteurs',this)" style="white-space:nowrap;">👤 Acheteurs</button>
+      <button class="tab-btn t3" onclick="switchTab('lots',this)" style="white-space:nowrap;">🏗 Lots &amp; Terrains</button>
+      <button class="tab-btn t5" onclick="switchTab('plans',this)" style="white-space:nowrap;">📐 Plans de Lotissement</button>
     </div>
   </div>
 </div>
@@ -472,7 +498,60 @@
       </table>
     </div>
   </div>
-</div>
+
+  <!-- PANE 4 : Plans de Lotissement -->
+  <div id="pane-plans" class="pane">
+    <div class="toolbar">
+      <div><h2>📐 Plans de Lotissement</h2><p id="plans-count">0 plan(s)</p></div>
+      <div class="toolbar-right">
+        <span style="font-size:12px;color:#0891b2;font-weight:600;">Formats : .dwg · .dxf</span>
+      </div>
+    </div>
+
+    <!-- Zone de dépôt DWG -->
+    <div class="drop-zone-plan" id="plan-drop-zone">
+      <input type="file" id="plan-file-input" accept=".dwg,.dxf" multiple onchange="handlePlanFiles(this.files)"/>
+      <div class="dz-icon">📂</div>
+      <p>Cliquez ou glissez vos fichiers DWG / DXF ici</p>
+      <small>Téléversez le plan — puis importez les lots via CSV ou saisie manuelle</small>
+    </div>
+
+    <!-- Bandeau d'import CSV -->
+    <div style="margin-top:16px;background:#fff;border-radius:14px;border:1.5px solid #a5f3fc;padding:18px 22px;box-shadow:0 2px 10px rgba(0,0,0,.05);">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <span style="font-size:22px;">📊</span>
+        <div style="flex:1;">
+          <div style="font-size:13px;font-weight:700;color:#0c4a6e;">Importer les lots depuis un fichier CSV / Excel</div>
+          <div style="font-size:11px;color:#888;margin-top:2px;">Exportez depuis AutoCAD (Extraction de données) ou créez un CSV avec les colonnes : <b>numero_lot, ilot, superficie, zone, utilisation, statut, prix</b></div>
+        </div>
+        <label style="display:inline-flex;align-items:center;gap:6px;padding:9px 18px;background:linear-gradient(135deg,#0891b2,#0e7490);color:#fff;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;box-shadow:0 3px 8px rgba(8,145,178,.3);">
+          📥 Importer CSV
+          <input type="file" id="csv-import-input" accept=".csv,.xlsx,.xls" style="display:none;" onchange="importLotsCSV(this)"/>
+        </label>
+        <a href="javascript:downloadSampleCSV()" style="font-size:11px;color:#0891b2;text-decoration:underline;white-space:nowrap;">⬇ Télécharger modèle CSV</a>
+      </div>
+    </div>
+
+    <!-- Grille des plans -->
+    <div id="plans-container" style="margin-top:20px;"></div>
+  </div>
+
+  <!-- ── MODAL EXTRACTION LOTS ── -->
+  <div id="extract-overlay" style="display:none;position:fixed;inset:0;background:rgba(10,10,30,.6);z-index:2000;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;">
+    <div style="background:#fff;border-radius:18px;width:100%;max-width:900px;margin:0 auto;box-shadow:0 30px 80px rgba(0,0,0,.3);overflow:hidden;">
+      <!-- Head -->
+      <div style="background:linear-gradient(135deg,#0891b2,#0e7490);padding:20px 26px;display:flex;align-items:center;justify-content:space-between;">
+        <div>
+          <div style="font-size:16px;font-weight:700;color:#fff;font-family:'Playfair Display',Georgia,serif;">🏗 Extraction des Lots depuis le Plan</div>
+          <div style="font-size:12px;color:#a5f3fc;margin-top:3px;" id="extract-plan-name">Plan : —</div>
+        </div>
+        <button onclick="closeExtract()" style="background:rgba(255,255,255,.2);border:none;color:#fff;width:34px;height:34px;border-radius:50%;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;">×</button>
+      </div>
+      <div style="padding:24px;" id="extract-body">
+        <!-- contenu injecté dynamiquement -->
+      </div>
+    </div>
+  </div>
 
 <!-- ── Barre d'export ── -->
 <div id="export-bar">
@@ -581,7 +660,97 @@ function switchTab(name, btn){
   document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
   document.getElementById("pane-"+name).classList.add("active");
   btn.classList.add("active");
+  if(name==="plans") renderPlans();
 }
+
+// ══════════════════════════════════════════════════════════════
+// PLANS DE LOTISSEMENT (DWG/DXF)
+// ══════════════════════════════════════════════════════════════
+let plans = JSON.parse(localStorage.getItem("plans_dwg")||"[]");
+
+function savePlans(){ localStorage.setItem("plans_dwg", JSON.stringify(plans)); }
+
+function handlePlanFiles(files){
+  Array.from(files).forEach(file=>{
+    const ext = file.name.split(".").pop().toLowerCase();
+    if(!["dwg","dxf"].includes(ext)){
+      alert("❌ Format non accepté : " + file.name + "\nSeuls les fichiers .dwg et .dxf sont autorisés.");
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = function(e){
+      const plan = {
+        id: "P" + Date.now() + Math.floor(Math.random()*1000),
+        nom: file.name,
+        taille: file.size,
+        ext: ext.toUpperCase(),
+        date: new Date().toLocaleDateString("fr-FR"),
+        dataUrl: e.target.result,
+        description: ""
+      };
+      plans.push(plan);
+      savePlans();
+      renderPlans();
+    };
+    reader.readAsDataURL(file);
+  });
+  document.getElementById("plan-file-input").value = "";
+}
+
+function deletePlan(id){
+  if(!confirm("Supprimer ce plan ?")) return;
+  plans = plans.filter(p=>p.id!==id);
+  savePlans();
+  renderPlans();
+}
+
+function downloadPlan(id){
+  const p = plans.find(x=>x.id===id);
+  if(!p) return;
+  const a = document.createElement("a");
+  a.href = p.dataUrl;
+  a.download = p.nom;
+  a.click();
+}
+
+function formatSize(bytes){
+  if(bytes < 1024) return bytes + " o";
+  if(bytes < 1024*1024) return (bytes/1024).toFixed(1) + " Ko";
+  return (bytes/(1024*1024)).toFixed(2) + " Mo";
+}
+
+function renderPlans(){
+  const container = document.getElementById("plans-container");
+  document.getElementById("plans-count").textContent = plans.length + " plan(s)";
+  if(!plans.length){
+    container.innerHTML = `<div class="plans-empty"><div class="e-icon">📐</div><p>Aucun plan téléversé pour l'instant.<br>Glissez vos fichiers DWG / DXF dans la zone ci-dessus.</p></div>`;
+    return;
+  }
+  container.innerHTML = `<div class="plans-grid">${plans.map(p=>`
+    <div class="plan-card">
+      <div class="plan-card-header">
+        <div class="plan-icon">${p.ext==="DXF"?"📄":"🗺"}</div>
+        <div>
+          <div class="plan-card-name">${esc(p.nom)}</div>
+          <div class="plan-card-meta">${p.ext} · ${formatSize(p.taille)} · Ajouté le ${p.date}</div>
+        </div>
+      </div>
+      <div class="plan-card-footer">
+        <a class="btn-dwg" onclick="downloadPlan('${p.id}')" href="javascript:void(0)">⬇ Télécharger ${p.ext}</a>
+        <button class="btn-del-plan" onclick="deletePlan('${p.id}')">🗑 Supprimer</button>
+      </div>
+    </div>`).join("")}</div>`;
+}
+
+// Drag & drop support
+document.addEventListener("DOMContentLoaded", function(){
+  const dz = document.getElementById("plan-drop-zone");
+  if(!dz) return;
+  dz.addEventListener("dragover", e=>{ e.preventDefault(); dz.style.borderColor="#0891b2"; dz.style.background="#e0f7fa"; });
+  dz.addEventListener("dragleave", ()=>{ dz.style.borderColor="#a5f3fc"; dz.style.background="#f0fdfe"; });
+  dz.addEventListener("drop", e=>{ e.preventDefault(); dz.style.borderColor="#a5f3fc"; dz.style.background="#f0fdfe"; handlePlanFiles(e.dataTransfer.files); });
+  renderPlans();
+});
 
 // ══════════════════════════════════════════════════════════════
 // RENDU TABLEAU PRINCIPAL
@@ -1613,3 +1782,4 @@ function gdriveRestore(){
 </script>
 </body>
 </html>
+
