@@ -10,9 +10,9 @@
     body { font-family: 'Source Serif 4', Georgia, serif; background: #f4f1eb; min-height: 100vh; }
 
     /* ── En-tête ── */
-    #header { background: linear-gradient(135deg,#1a1a2e 0%,#16213e 60%,#0f3460 100%); padding: 28px 32px 0; box-shadow: 0 4px 20px rgba(0,0,0,.3); }
+    #header { background: linear-gradient(135deg,#1a1a2e 0%,#16213e 60%,#0f3460 100%); padding: 0 0 0; box-shadow: 0 4px 20px rgba(0,0,0,.3); }
     #header-inner { max-width: 1200px; margin: 0 auto; }
-    #header-top { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+    #header-top { display: flex; align-items: center; gap: 16px; padding: 28px 32px 0; margin-bottom: 24px; flex-wrap: wrap; }
     #logo { width:48px;height:48px;background:linear-gradient(135deg,#c4920a,#8b6914);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 4px 12px rgba(196,146,10,.4);flex-shrink:0; }
     #title h1 { font-size:22px;font-weight:700;color:#fff;font-family:'Playfair Display',Georgia,serif;letter-spacing:.5px; }
     #title p { font-size:12px;color:#94a3b8;letter-spacing:1px;text-transform:uppercase;margin-top:2px; }
@@ -20,153 +20,44 @@
     .stat-box { text-align:center;padding:8px 16px;background:rgba(255,255,255,.07);border-radius:10px;border:1px solid rgba(255,255,255,.1); }
     .stat-box .val { font-size:20px;font-weight:700; }
     .stat-box .lbl { font-size:10px;color:#94a3b8;text-transform:uppercase;letter-spacing:.8px; }
-    /* tabs */
-    #tabs { display:flex;gap:4px; }
-    .tab-btn { padding:10px 22px;border:none;background:transparent;color:#94a3b8;font-weight:500;font-size:13px;border-radius:10px 10px 0 0;cursor:pointer;transition:all .2s;font-family:inherit;letter-spacing:.2px; }
-    .tab-btn.active { background:#fff;font-weight:700; }
-    .tab-btn.t1.active { color:#2d7a3a; }
-    .tab-btn.t2.active { color:#8b6914; }
-    .tab-btn.t3.active { color:#1a3e8a; }
 
-    /* ── Contenu ── */
-    #content { max-width:1200px;margin:0 auto;padding:24px 20px; }
-    .pane { display:none; }
-    .pane.active { display:block; }
-
-    /* toolbar */
-    .toolbar { display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px; }
-    .toolbar h2 { font-size:18px;font-weight:700;color:#1a1a2e;font-family:'Playfair Display',Georgia,serif; }
-    .toolbar p { font-size:12px;color:#888;margin-top:4px; }
-    .toolbar-right { display:flex;gap:10px;align-items:center; }
-    .search-input { padding:9px 14px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:13px;outline:none;width:200px;font-family:inherit; }
-    .btn { padding:9px 20px;border:none;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit; }
-    .btn-green { background:linear-gradient(135deg,#3d6b2a,#4caf50);color:#fff;box-shadow:0 3px 10px rgba(61,107,42,.3); }
-    .btn-gold  { background:linear-gradient(135deg,#8b6914,#c4920a);color:#fff;box-shadow:0 3px 10px rgba(139,105,20,.3); }
-    .btn-blue  { background:linear-gradient(135deg,#1a3e8a,#2563eb);color:#fff;box-shadow:0 3px 10px rgba(26,62,138,.3); }
-    .btn-ghost { background:#fff;border:1.5px solid #e5e7eb;color:#666; }
-    .btn-del  { background:#fef2f2;border:1.5px solid #fde8e8;color:#c0392b; }
-    .btn-edit { background:#fff;border:1.5px solid #e5e7eb;color:#555; }
-    .btn-sm { padding:4px 10px;font-size:11px;border-radius:6px;cursor:pointer;font-family:inherit;font-weight:600; }
-
-    /* table */
-    .card-table { background:#fff;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,.06);overflow:hidden; }
-    table { width:100%;border-collapse:collapse; }
-    thead tr { background:#f8f7f4; }
-    .t3-head thead tr { background:#f0f4ff; }
-    th { padding:12px 14px;text-align:left;font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid #f0f0f0;white-space:nowrap; }
-    .t3-head th { color:#1a3e8a;border-bottom-color:#dbeafe; }
-    td { padding:12px 14px;font-size:13px;color:#333;border-bottom:1px solid #f7f7f7; }
-    tr:nth-child(even) td { background:#fafafa; }
-    .t3-head tr:nth-child(even) td { background:#fafbff; }
-    .empty-row td { padding:40px;text-align:center;color:#aaa;font-size:14px; }
-    .lot-id { font-size:12px;font-weight:700;color:#1a3e8a; }
-    .dos-id { font-size:12px;font-weight:700;color:#1a1a2e; }
-    .buyer-name { font-size:13px;font-weight:600;color:#1a1a2e; }
-
-    /* badges */
-    .badge { display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;letter-spacing:.3px; }
-    .badge-dot { width:6px;height:6px;border-radius:50%;flex-shrink:0; }
-    .b-dispo { background:#e6f4ea;color:#2d7a3a; } .b-dispo .badge-dot { background:#34a853; }
-    .b-res   { background:#fff8e1;color:#8a6100; } .b-res   .badge-dot { background:#fbbc04; }
-    .b-ven   { background:#fce8e6;color:#8b0000; } .b-ven   .badge-dot { background:#ea4335; }
-    .b-enc   { background:#e8f0fe;color:#1a3e8a; } .b-enc   .badge-dot { background:#4285f4; }
-
-    /* cards acheteurs */
-    .cards-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px; }
-    .card { background:#fff;border-radius:14px;box-shadow:0 4px 16px rgba(0,0,0,.06);overflow:hidden;border:1px solid #f0e8d0; }
-    .card-header { background:linear-gradient(135deg,#fdf6e3,#fef9ef);padding:16px 20px;border-bottom:1px solid #f0e8d0;display:flex;justify-content:space-between;align-items:flex-start; }
-    .card-name { font-size:16px;font-weight:700;color:#1a1a2e;font-family:'Playfair Display',Georgia,serif; }
-    .card-cin  { font-size:12px;color:#8b6914;margin-top:2px;font-weight:600; }
-    .card-body { padding:14px 20px;display:flex;flex-direction:column;gap:7px; }
-    .card-row  { display:flex;gap:8px;font-size:12px; }
-    .card-lbl  { color:#999;min-width:90px; }
-    .card-val  { color:#333;font-weight:500; }
-    .pieces-title { font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.8px;margin:8px 0 6px; }
-    .pieces-wrap { display:flex;flex-wrap:wrap;gap:5px; }
-    .piece-tag { padding:3px 9px;background:#e6f4ea;color:#2d7a3a;border-radius:12px;font-size:11px;font-weight:600; }
-    .dossier-info { margin-top:6px;padding:7px 12px;background:#f8f7f4;border-radius:8px;font-size:12px;color:#666; }
-
-    /* ilot badge */
-    .ilot-badge { background:#e8f0fe;color:#1a3e8a;padding:3px 10px;border-radius:6px;font-weight:700;font-size:13px; }
-
-    /* ── Export bar ── */
-    #export-bar { background:#fff;border-top:3px solid #c4920a;padding:10px 32px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;box-shadow:0 -2px 10px rgba(0,0,0,.06); position:sticky;bottom:0;z-index:50;}
-    #export-bar span { font-size:12px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.8px;margin-right:4px; }
-    .btn-export { display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;border:none;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s; }
-    .btn-exp-all  { background:linear-gradient(135deg,#c4920a,#8b6914);color:#fff;box-shadow:0 3px 8px rgba(196,146,10,.3); }
-    .btn-exp-dos  { background:#e6f4ea;color:#2d7a3a;border:1.5px solid #b7dfbe; }
-    .btn-exp-achet{ background:#fdf6e3;color:#8b6914;border:1.5px solid #e8d08a; }
-    .btn-exp-lots { background:#e8f0fe;color:#1a3e8a;border:1.5px solid #b3c8f5; }
-    .btn-exp-rapport { background:linear-gradient(135deg,#1a1a2e,#2d3a6e);color:#fff;box-shadow:0 3px 8px rgba(26,26,46,.35);font-size:13px; }
-    /* ── Modal ── */
-    #modal-overlay { display:none;position:fixed;inset:0;background:rgba(10,10,30,.55);z-index:1000;align-items:center;justify-content:center;padding:20px; }
-    #modal-overlay.open { display:flex; }
-    .modal-box { background:#fff;border-radius:16px;width:100%;max-width:620px;max-height:90vh;overflow-y:auto;box-shadow:0 25px 60px rgba(0,0,0,.25); }
-    .modal-head { display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border-bottom:1px solid #f0f0f0;position:sticky;top:0;background:#fff;z-index:1; }
-    .modal-head h3 { font-size:16px;font-weight:700;color:#1a1a2e;font-family:'Playfair Display',Georgia,serif; }
-    .modal-close { background:#f5f5f5;border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:18px;color:#666;display:flex;align-items:center;justify-content:center; }
-    .modal-body { padding:24px; }
-
-    /* form */
-    .form-grid { display:grid;grid-template-columns:1fr 1fr;gap:14px; }
-    .form-full { grid-column:1/-1; }
-    .form-field { display:flex;flex-direction:column;gap:5px; }
-    .form-field label { font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.8px; }
-    .form-field input, .form-field select { padding:9px 12px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:13px;color:#1a1a2e;background:#fafafa;outline:none;font-family:inherit;transition:border-color .2s; }
-    .form-field input:focus, .form-field select:focus { border-color:#8b6914; }
-    .form-actions { display:flex;gap:10px;justify-content:flex-end;margin-top:16px; }
-    .req { color:#c0392b; }
-
-    /* pieces checkboxes */
-    .pieces-check-wrap { display:flex;flex-wrap:wrap;gap:8px;margin-top:4px; }
-    .piece-check { display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:20px;border:1.5px solid #e5e7eb;background:#fafafa;cursor:pointer;font-size:12px;font-weight:500;color:#666;transition:all .15s;user-select:none; }
-    .piece-check.checked { border-color:#8b6914;background:#fdf6e3;color:#8b6914;font-weight:600; }
-
-    /* ── Pièces jointes ── */
-    .file-drop-zone { border:2px dashed #e5e7eb;border-radius:10px;padding:14px 12px;text-align:center;font-size:12px;color:#999;cursor:pointer;transition:border-color .2s,background .2s;background:#fafafa;position:relative; }
-    .file-drop-zone:hover { border-color:#8b6914;color:#8b6914;background:#fdf6e3; }
-    .file-drop-zone input[type=file] { position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%; }
-    .attach-list { display:flex;flex-direction:column;gap:5px;margin-top:8px; }
-    .attach-item { display:flex;align-items:center;gap:7px;padding:5px 10px;background:#e6f4ea;border:1px solid #b7dfbe;border-radius:8px;font-size:11px;color:#333; }
-    .attach-item .a-name { flex:1;font-weight:600;color:#1a1a2e;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:200px; }
-    .attach-item .a-size { color:#888;flex-shrink:0; }
-    .attach-item .a-view { cursor:pointer;color:#1a3e8a;font-weight:700;font-size:11px;text-decoration:underline;flex-shrink:0; }
-    .attach-item .a-del  { cursor:pointer;color:#c0392b;font-size:14px;font-weight:700;flex-shrink:0;line-height:1; }
-    .attach-reading { font-size:11px;color:#8b6914;font-style:italic;margin-top:5px; }
-
-    /* ── Reçu ── */
-    .btn-receipt { background:linear-gradient(135deg,#c4920a,#8b6914);color:#fff;box-shadow:0 3px 8px rgba(196,146,10,.3); }
-  </style>
-</head>
-<body><!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Guide de Lotissements</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Serif+4:wght@400;500;600&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Source Serif 4', Georgia, serif; background: #f4f1eb; min-height: 100vh; }
-
-    /* ── En-tête ── */
-    #header { background: linear-gradient(135deg,#1a1a2e 0%,#16213e 60%,#0f3460 100%); padding: 28px 32px 0; box-shadow: 0 4px 20px rgba(0,0,0,.3); }
-    #header-inner { max-width: 1200px; margin: 0 auto; }
-    #header-top { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
-    #logo { width:48px;height:48px;background:linear-gradient(135deg,#c4920a,#8b6914);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 4px 12px rgba(196,146,10,.4);flex-shrink:0; }
-    #title h1 { font-size:22px;font-weight:700;color:#fff;font-family:'Playfair Display',Georgia,serif;letter-spacing:.5px; }
-    #title p { font-size:12px;color:#94a3b8;letter-spacing:1px;text-transform:uppercase;margin-top:2px; }
-    #stats { display:flex;gap:12px;flex-wrap:wrap;margin-left:auto; }
-    .stat-box { text-align:center;padding:8px 16px;background:rgba(255,255,255,.07);border-radius:10px;border:1px solid rgba(255,255,255,.1); }
-    .stat-box .val { font-size:20px;font-weight:700; }
-    .stat-box .lbl { font-size:10px;color:#94a3b8;text-transform:uppercase;letter-spacing:.8px; }
+    /* ── Barre de navigation principale (AJOUT) ── */
+    #main-nav {
+      background: rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+      padding: 6px 32px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    #main-nav a {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #94a3b8;
+      text-decoration: none;
+      transition: all .2s;
+      font-family: 'Source Serif 4', Georgia, serif;
+      letter-spacing: .2px;
+    }
+    #main-nav a:hover { background: rgba(255,255,255,0.10); color: #fff; }
+    #main-nav a.nav-active {
+      background: rgba(196,146,10,0.18);
+      color: #c4920a;
+      border: 1px solid rgba(196,146,10,0.25);
+    }
+    #main-nav .nav-sep { width:1px; height:20px; background:rgba(255,255,255,0.12); margin: 0 4px; display:inline-block; }
 
     /* save indicator */
     #save-indicator { position:fixed;top:14px;right:18px;z-index:9999;background:#2d7a3a;color:#fff;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;opacity:0;transition:opacity .4s;pointer-events:none; }
     #save-indicator.show { opacity:1; }
 
     /* tabs */
-    #tabs { display:flex;gap:4px; }
+    #tabs { display:flex;gap:4px;padding: 0 32px; }
     .tab-btn { padding:10px 22px;border:none;background:transparent;color:#94a3b8;font-weight:500;font-size:13px;border-radius:10px 10px 0 0;cursor:pointer;transition:all .2s;font-family:inherit;letter-spacing:.2px; }
     .tab-btn.active { background:#fff;font-weight:700; }
     .tab-btn.t1.active { color:#2d7a3a; }
@@ -266,21 +157,6 @@
     .ilot-badge { background:#e8f0fe;color:#1a3e8a;padding:3px 10px;border-radius:6px;font-weight:700;font-size:13px; }
     .secteur-badge { background:#ede9fe;color:#5b21b6;padding:3px 10px;border-radius:6px;font-weight:700;font-size:12px; }
 
-    /* ── Secteurs pane ── */
-    .secteur-group { background:#fff;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,.06);overflow:hidden;margin-bottom:24px;border:1px solid #ede9fe; }
-    .secteur-group-head { background:linear-gradient(135deg,#f5f3ff,#ede9fe);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;border-bottom:1px solid #ddd6fe; }
-    .secteur-title { font-size:16px;font-weight:700;color:#5b21b6;font-family:'Playfair Display',Georgia,serif;display:flex;align-items:center;gap:10px; }
-    .secteur-mini-stats { display:flex;gap:10px;flex-wrap:wrap; }
-    .s-mini { padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700; }
-    .s-mini-dispo { background:#e6f4ea;color:#2d7a3a; }
-    .s-mini-res   { background:#fff8e1;color:#8a6100; }
-    .s-mini-ven   { background:#fce8e6;color:#8b0000; }
-    .s-mini-enc   { background:#e8f0fe;color:#1a3e8a; }
-    .secteur-filter-bar { display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;align-items:center; }
-    .secteur-filter-btn { padding:6px 14px;border-radius:20px;border:1.5px solid #ddd6fe;background:#f5f3ff;color:#5b21b6;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s; }
-    .secteur-filter-btn.active { background:#7c3aed;color:#fff;border-color:#7c3aed; }
-    .secteur-empty { padding:30px;text-align:center;color:#9ca3af;font-size:13px; }
-
     /* ── Export bar ── */
     #export-bar { background:#fff;border-top:3px solid #c4920a;padding:10px 32px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;box-shadow:0 -2px 10px rgba(0,0,0,.06); position:sticky;bottom:0;z-index:50;}
     #export-bar span { font-size:12px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.8px;margin-right:4px; }
@@ -324,8 +200,20 @@
     .piece-check { display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:20px;border:1.5px solid #e5e7eb;background:#fafafa;cursor:pointer;font-size:12px;font-weight:500;color:#666;transition:all .15s;user-select:none; }
     .piece-check.checked { border-color:#8b6914;background:#fdf6e3;color:#8b6914;font-weight:600; }
 
-    /* already attributed warning in lot select */
-    option.lot-attrib { color:#c0392b; }
+    /* ── Pièces jointes ── */
+    .file-drop-zone { border:2px dashed #e5e7eb;border-radius:10px;padding:14px 12px;text-align:center;font-size:12px;color:#999;cursor:pointer;transition:border-color .2s,background .2s;background:#fafafa;position:relative; }
+    .file-drop-zone:hover { border-color:#8b6914;color:#8b6914;background:#fdf6e3; }
+    .file-drop-zone input[type=file] { position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%; }
+    .attach-list { display:flex;flex-direction:column;gap:5px;margin-top:8px; }
+    .attach-item { display:flex;align-items:center;gap:7px;padding:5px 10px;background:#e6f4ea;border:1px solid #b7dfbe;border-radius:8px;font-size:11px;color:#333; }
+    .attach-item .a-name { flex:1;font-weight:600;color:#1a1a2e;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:200px; }
+    .attach-item .a-size { color:#888;flex-shrink:0; }
+    .attach-item .a-view { cursor:pointer;color:#1a3e8a;font-weight:700;font-size:11px;text-decoration:underline;flex-shrink:0; }
+    .attach-item .a-del  { cursor:pointer;color:#c0392b;font-size:14px;font-weight:700;flex-shrink:0;line-height:1; }
+    .attach-reading { font-size:11px;color:#8b6914;font-style:italic;margin-top:5px; }
+
+    /* ── Reçu ── */
+    .btn-receipt { background:linear-gradient(135deg,#c4920a,#8b6914);color:#fff;box-shadow:0 3px 8px rgba(196,146,10,.3); }
   </style>
 </head>
 <body>
@@ -387,12 +275,10 @@
 
 <script>
 (function(){
-  var HASH = "7c9b9c5b9e2a3d4f8e1b2c6d0a5f3e7b"; // BERE26 hashed
   function simpleHash(s){
     var h=0;for(var i=0;i<s.length;i++){h=((h<<5)-h)+s.charCodeAt(i);h|=0;}
     return Math.abs(h).toString(16).padStart(8,'0');
   }
-  // Stocker le vrai hash
   window._pwHash = simpleHash("BERE26");
 
   window.checkPw = function(){
@@ -421,10 +307,17 @@
 <!-- Save indicator -->
 <div id="save-indicator">✓ Sauvegardé</div>
 
-
 <!-- ── En-tête ── -->
 <div id="header">
   <div id="header-inner">
+
+    <!-- ══ NAVIGATION PRINCIPALE (AJOUT) ══ -->
+    <nav id="main-nav">
+      <a href="index.html">🏠 Accueil</a>
+      <span class="nav-sep"></span>
+      <a href="PLAN_VIEWER.html" class="nav-active">📐 Plan</a>
+    </nav>
+
     <div id="header-top">
       <div id="logo">🏘</div>
       <div id="title">
@@ -509,7 +402,6 @@
       </div>
     </div>
 
-    <!-- Zone de dépôt DWG -->
     <div class="drop-zone-plan" id="plan-drop-zone">
       <input type="file" id="plan-file-input" accept=".dwg,.dxf" multiple onchange="handlePlanFiles(this.files)"/>
       <div class="dz-icon">📂</div>
@@ -517,13 +409,12 @@
       <small>Téléversez le plan — puis importez les lots via CSV ou saisie manuelle</small>
     </div>
 
-    <!-- Bandeau d'import CSV -->
     <div style="margin-top:16px;background:#fff;border-radius:14px;border:1.5px solid #a5f3fc;padding:18px 22px;box-shadow:0 2px 10px rgba(0,0,0,.05);">
       <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
         <span style="font-size:22px;">📊</span>
         <div style="flex:1;">
           <div style="font-size:13px;font-weight:700;color:#0c4a6e;">Importer les lots depuis un fichier CSV / Excel</div>
-          <div style="font-size:11px;color:#888;margin-top:2px;">Exportez depuis AutoCAD (Extraction de données) ou créez un CSV avec les colonnes : <b>numero_lot, ilot, superficie, zone, utilisation, statut, prix</b></div>
+          <div style="font-size:11px;color:#888;margin-top:2px;">Colonnes : <b>numero_lot, ilot, superficie, zone, utilisation, statut, prix</b></div>
         </div>
         <label style="display:inline-flex;align-items:center;gap:6px;padding:9px 18px;background:linear-gradient(135deg,#0891b2,#0e7490);color:#fff;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;box-shadow:0 3px 8px rgba(8,145,178,.3);">
           📥 Importer CSV
@@ -533,14 +424,12 @@
       </div>
     </div>
 
-    <!-- Grille des plans -->
     <div id="plans-container" style="margin-top:20px;"></div>
   </div>
 
   <!-- ── MODAL EXTRACTION LOTS ── -->
   <div id="extract-overlay" style="display:none;position:fixed;inset:0;background:rgba(10,10,30,.6);z-index:2000;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;">
     <div style="background:#fff;border-radius:18px;width:100%;max-width:900px;margin:0 auto;box-shadow:0 30px 80px rgba(0,0,0,.3);overflow:hidden;">
-      <!-- Head -->
       <div style="background:linear-gradient(135deg,#0891b2,#0e7490);padding:20px 26px;display:flex;align-items:center;justify-content:space-between;">
         <div>
           <div style="font-size:16px;font-weight:700;color:#fff;font-family:'Playfair Display',Georgia,serif;">🏗 Extraction des Lots depuis le Plan</div>
@@ -548,9 +437,7 @@
         </div>
         <button onclick="closeExtract()" style="background:rgba(255,255,255,.2);border:none;color:#fff;width:34px;height:34px;border-radius:50%;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;">×</button>
       </div>
-      <div style="padding:24px;" id="extract-body">
-        <!-- contenu injecté dynamiquement -->
-      </div>
+      <div style="padding:24px;" id="extract-body"></div>
     </div>
   </div>
 
@@ -564,7 +451,7 @@
   <div style="width:1px;height:32px;background:#e5e7eb;margin:0 4px"></div>
   <button class="btn-export btn-exp-rapport" onclick="genererRapport()">📄 Rapport hebdomadaire (tout en un)</button>
   <div style="margin-left:auto;display:flex;align-items:center;gap:14px">
-    <span id="save-indicator" style="font-size:12px;color:#888">💾 Chargement...</span>
+    <span id="save-status" style="font-size:12px;color:#888">💾 Chargement...</span>
     <button class="btn-export" onclick="reinitialiserDonnees()" style="background:#fef2f2;color:#c0392b;border:1.5px solid #fde8e8;font-size:11px">🗑 Réinitialiser</button>
   </div>
 </div>
@@ -578,27 +465,16 @@
   <button class="btn-export" onclick="toggleGdriveConfig()" style="margin-left:auto;background:#fff;color:#1a73e8;border:1.5px solid #b3c8f5;font-size:11px">⚙️ Config API</button>
 </div>
 
-<!-- ── Panneau de configuration Google Drive ── -->
 <div id="gdrive-config-panel">
   <div style="max-width:640px;margin:0 auto">
     <div style="font-size:12px;font-weight:700;color:#1a3e8a;text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px">⚙️ Configuration Google Drive API</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-      <div>
-        <label>Client ID OAuth 2.0</label>
-        <input id="gdrive-client-id" type="text" placeholder="xxxxxx.apps.googleusercontent.com"/>
-      </div>
-      <div>
-        <label>API Key</label>
-        <input id="gdrive-api-key" type="text" placeholder="AIzaSy…"/>
-      </div>
+      <div><label>Client ID OAuth 2.0</label><input id="gdrive-client-id" type="text" placeholder="xxxxxx.apps.googleusercontent.com"/></div>
+      <div><label>API Key</label><input id="gdrive-api-key" type="text" placeholder="AIzaSy…"/></div>
     </div>
     <div style="display:flex;align-items:center;gap:12px;margin-top:10px;flex-wrap:wrap">
       <button onclick="saveGdriveConfig()" style="padding:7px 18px;background:linear-gradient(135deg,#1a73e8,#0d47a1);color:#fff;border:none;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit">💾 Enregistrer</button>
       <button onclick="toggleGdriveConfig()" style="padding:7px 14px;background:#fff;color:#666;border:1.5px solid #e5e7eb;border-radius:7px;font-size:12px;cursor:pointer;font-family:inherit">Fermer</button>
-      <a href="https://console.cloud.google.com/apis/credentials" target="_blank" style="font-size:11px;color:#1a73e8;text-decoration:none">🔗 Google Cloud Console → Identifiants OAuth 2.0</a>
-    </div>
-    <div style="margin-top:8px;padding:8px 12px;background:#fff;border-radius:6px;border:1px solid #c5d9f5;font-size:11px;color:#555;line-height:1.6">
-      <b>Étapes :</b> 1) Créer un projet sur Google Cloud Console · 2) Activer l'API Google Drive · 3) Créer des identifiants OAuth 2.0 (type : Application Web) · 4) Ajouter votre domaine aux origines autorisées · 5) Copier le Client ID et l'API Key ici
     </div>
   </div>
 </div>
@@ -615,9 +491,6 @@
 </div>
 
 <script>
-// ══════════════════════════════════════════════════════════════
-// DONNÉES
-// ══════════════════════════════════════════════════════════════
 const PIECES_OPTIONS   = ["CIN","Extrait de naissance","Justificatif de domicile","Certificat de résidence","Acte de mariage","Attestation de travail","Relevé bancaire","Titre foncier","Attestation Villageois"];
 const UTILISATION_OPT  = ["Résidentiel","Commercial","Industriel","Agricole","Mixte"];
 const STATUT_OPT       = ["Disponible","Réservé","Vendu","En cours"];
@@ -636,11 +509,8 @@ let dossiers = [
   { id:"D001", acheteur_id:"A001", lot_id:"L001", date_attribution:"2024-06-15", prix:850000, notes:"Dossier complet" },
 ];
 
-let editMode = null; // { type, id }
+let editMode = null;
 
-// ══════════════════════════════════════════════════════════════
-// UTILITAIRES
-// ══════════════════════════════════════════════════════════════
 function genId(p){ return p + Date.now().toString().slice(-4); }
 function esc(s){ return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 
@@ -664,13 +534,10 @@ function switchTab(name, btn){
   if(name==="plans") renderPlans();
 }
 
-// ══════════════════════════════════════════════════════════════
-// PLANS DE LOTISSEMENT — EXTRACTION VERS LOTS & TERRAINS
-// ══════════════════════════════════════════════════════════════
+// ── Plans ──
 let plans = JSON.parse(localStorage.getItem("plans_dwg")||"[]");
 function savePlans(){ localStorage.setItem("plans_dwg", JSON.stringify(plans)); }
 
-// ── Taille lisible ─────────────────────────────────────────────
 function fileSizeStr(bytes){
   if(!bytes) return "";
   if(bytes < 1024) return bytes + " o";
@@ -678,24 +545,13 @@ function fileSizeStr(bytes){
   return (bytes/(1024*1024)).toFixed(2) + " Mo";
 }
 
-// ── Upload DWG/DXF ────────────────────────────────────────────
 function handlePlanFiles(files){
   Array.from(files).forEach(file=>{
     const ext = file.name.split(".").pop().toLowerCase();
-    if(!["dwg","dxf"].includes(ext)){
-      alert("❌ Format non accepté : "+file.name+"\nSeuls .dwg et .dxf sont autorisés.");
-      return;
-    }
+    if(!["dwg","dxf"].includes(ext)){ alert("❌ Format non accepté : "+file.name); return; }
     const reader = new FileReader();
     reader.onload = e=>{
-      plans.push({
-        id: "P"+Date.now()+Math.floor(Math.random()*1000),
-        nom: file.name, taille: file.size,
-        ext: ext.toUpperCase(),
-        date: new Date().toLocaleDateString("fr-FR"),
-        dataUrl: e.target.result,
-        lotsExtraits: []
-      });
+      plans.push({ id:"P"+Date.now()+Math.floor(Math.random()*1000), nom:file.name, taille:file.size, ext:ext.toUpperCase(), date:new Date().toLocaleDateString("fr-FR"), dataUrl:e.target.result, lotsExtraits:[] });
       savePlans(); renderPlans();
     };
     reader.readAsDataURL(file);
@@ -703,39 +559,21 @@ function handlePlanFiles(files){
   document.getElementById("plan-file-input").value="";
 }
 
-function deletePlan(id){
-  if(!confirm("Supprimer ce plan ?")) return;
-  plans = plans.filter(p=>p.id!==id);
-  savePlans(); renderPlans();
-}
-function downloadPlan(id){
-  const p = plans.find(x=>x.id===id); if(!p) return;
-  const a = document.createElement("a"); a.href=p.dataUrl; a.download=p.nom; a.click();
-}
+function deletePlan(id){ if(!confirm("Supprimer ce plan ?")) return; plans=plans.filter(p=>p.id!==id); savePlans(); renderPlans(); }
+function downloadPlan(id){ const p=plans.find(x=>x.id===id); if(!p) return; const a=document.createElement("a"); a.href=p.dataUrl; a.download=p.nom; a.click(); }
 
-// ── Rendu liste des plans ─────────────────────────────────────
 function renderPlans(){
   const container = document.getElementById("plans-container");
   document.getElementById("plans-count").textContent = plans.length+" plan(s)";
   if(!plans.length){
-    container.innerHTML=`<div class="plans-empty"><div class="e-icon">📐</div><p>Aucun plan téléversé.<br>Glissez vos fichiers DWG / DXF ci-dessus.</p></div>`;
+    container.innerHTML=`<div class="plans-empty"><div class="e-icon">📐</div><p>Aucun plan téléversé.</p></div>`;
     return;
   }
   container.innerHTML=`<div class="plans-grid">${plans.map(p=>{
-    const nb = p.lotsExtraits?.length||0;
+    const nb=p.lotsExtraits?.length||0;
     return `<div class="plan-card">
-      <div class="plan-card-header">
-        <div class="plan-icon">${p.ext==="DXF"?"📄":"🗺"}</div>
-        <div style="flex:1">
-          <div class="plan-card-name">${esc(p.nom)}</div>
-          <div class="plan-card-meta">${p.ext} · ${fileSizeStr(p.taille)} · ${p.date}</div>
-        </div>
-      </div>
-      <div style="padding:10px 18px;background:#f0fdfe;border-bottom:1px solid #cffafe;display:flex;align-items:center;gap:8px;">
-        <span style="font-size:12px;color:#0891b2;font-weight:600;">
-          ${nb>0?`✅ ${nb} lot(s) extrait(s) et enregistré(s)`:`⚠️ Aucun lot extrait`}
-        </span>
-      </div>
+      <div class="plan-card-header"><div class="plan-icon">${p.ext==="DXF"?"📄":"🗺"}</div><div style="flex:1"><div class="plan-card-name">${esc(p.nom)}</div><div class="plan-card-meta">${p.ext} · ${fileSizeStr(p.taille)} · ${p.date}</div></div></div>
+      <div style="padding:10px 18px;background:#f0fdfe;border-bottom:1px solid #cffafe;"><span style="font-size:12px;color:#0891b2;font-weight:600;">${nb>0?`✅ ${nb} lot(s) extrait(s)`:`⚠️ Aucun lot extrait`}</span></div>
       <div class="plan-card-footer" style="flex-wrap:wrap;gap:6px;">
         <button class="btn-dwg" onclick="openExtract('${p.id}')">🏗 Extraire les lots</button>
         <a class="btn-dwg" style="background:linear-gradient(135deg,#475569,#334155)" onclick="downloadPlan('${p.id}')" href="javascript:void(0)">⬇ Télécharger</a>
@@ -745,39 +583,28 @@ function renderPlans(){
   }).join("")}</div>`;
 }
 
-// ══════════════════════════════════════════════════════════════
-// MODAL EXTRACTION LOTS
-// ══════════════════════════════════════════════════════════════
-let _extractPlanId = null;
-let _extractRows = [];  // lots en cours de saisie
+// ── Extract Modal ──
+let _extractPlanId=null, _extractRows=[];
 
 function openExtract(planId){
-  _extractPlanId = planId;
-  const plan = plans.find(p=>p.id===planId);
-  document.getElementById("extract-plan-name").textContent = "Plan : "+plan.nom;
-  _extractRows = (plan.lotsExtraits||[]).map(l=>({...l}));
+  _extractPlanId=planId;
+  const plan=plans.find(p=>p.id===planId);
+  document.getElementById("extract-plan-name").textContent="Plan : "+plan.nom;
+  _extractRows=(plan.lotsExtraits||[]).map(l=>({...l}));
   renderExtractBody();
   document.getElementById("extract-overlay").style.display="flex";
 }
-function closeExtract(){
-  document.getElementById("extract-overlay").style.display="none";
-  _extractPlanId=null; _extractRows=[];
-}
+function closeExtract(){ document.getElementById("extract-overlay").style.display="none"; _extractPlanId=null; _extractRows=[]; }
 
 function renderExtractBody(){
-  const body = document.getElementById("extract-body");
-  const plan = plans.find(p=>p.id===_extractPlanId);
-  const nbAlreadyInLots = _extractRows.filter(r=>r._savedId).length;
-
+  const body=document.getElementById("extract-body");
+  const nbAlreadyInLots=_extractRows.filter(r=>r._savedId).length;
   body.innerHTML=`
-  <!-- Onglets méthode -->
   <div style="display:flex;gap:8px;margin-bottom:20px;border-bottom:2px solid #e5e7eb;padding-bottom:0;">
     <button id="meth-tab-manual" onclick="showMethodTab('manual')" style="padding:8px 18px;border:none;background:transparent;font-weight:700;font-size:13px;cursor:pointer;border-bottom:2px solid #0891b2;color:#0891b2;font-family:inherit;margin-bottom:-2px;">✏️ Saisie manuelle</button>
-    <button id="meth-tab-csv"    onclick="showMethodTab('csv')"    style="padding:8px 18px;border:none;background:transparent;font-weight:700;font-size:13px;cursor:pointer;border-bottom:2px solid transparent;color:#888;font-family:inherit;margin-bottom:-2px;">📊 Import CSV</button>
-    <button id="meth-tab-ai"     onclick="showMethodTab('ai')"     style="padding:8px 18px;border:none;background:transparent;font-weight:700;font-size:13px;cursor:pointer;border-bottom:2px solid transparent;color:#888;font-family:inherit;margin-bottom:-2px;">🤖 Saisie assistée par IA</button>
+    <button id="meth-tab-csv" onclick="showMethodTab('csv')" style="padding:8px 18px;border:none;background:transparent;font-weight:700;font-size:13px;cursor:pointer;border-bottom:2px solid transparent;color:#888;font-family:inherit;margin-bottom:-2px;">📊 Import CSV</button>
+    <button id="meth-tab-ai" onclick="showMethodTab('ai')" style="padding:8px 18px;border:none;background:transparent;font-weight:700;font-size:13px;cursor:pointer;border-bottom:2px solid transparent;color:#888;font-family:inherit;margin-bottom:-2px;">🤖 Saisie assistée par IA</button>
   </div>
-
-  <!-- Méthode : saisie manuelle -->
   <div id="meth-manual">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
       <span style="font-size:13px;font-weight:700;color:#1a1a2e;">Lots à importer (${_extractRows.length})</span>
@@ -786,87 +613,60 @@ function renderExtractBody(){
         <button onclick="addMultipleRows()" style="padding:7px 14px;background:#fff;border:1.5px solid #e5e7eb;color:#555;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">++ Ajouter plusieurs</button>
       </div>
     </div>
-    <div id="extract-rows-container" style="max-height:380px;overflow-y:auto;">
-      ${renderExtractRows()}
-    </div>
+    <div id="extract-rows-container" style="max-height:380px;overflow-y:auto;">${renderExtractRows()}</div>
   </div>
-
-  <!-- Méthode : CSV -->
   <div id="meth-csv" style="display:none;">
     <div style="background:#f8fafc;border-radius:12px;padding:20px;border:1.5px dashed #cbd5e1;text-align:center;">
       <div style="font-size:32px;margin-bottom:10px;">📊</div>
       <p style="font-size:14px;font-weight:700;color:#1a1a2e;margin-bottom:6px;">Importez un fichier CSV exporté depuis AutoCAD</p>
-      <p style="font-size:12px;color:#888;margin-bottom:16px;">Colonnes attendues : <code style="background:#e5e7eb;padding:2px 6px;border-radius:4px;">numero_lot, ilot, superficie, zone, utilisation, statut, prix</code></p>
       <label style="display:inline-flex;align-items:center;gap:6px;padding:10px 22px;background:linear-gradient(135deg,#0891b2,#0e7490);color:#fff;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;">
         📥 Choisir un fichier CSV
         <input type="file" accept=".csv" style="display:none;" onchange="parseCsvIntoExtract(this)"/>
       </label>
-      <div style="margin-top:12px;">
-        <a href="javascript:downloadSampleCSV()" style="font-size:12px;color:#0891b2;text-decoration:underline;">⬇ Télécharger le modèle CSV</a>
-      </div>
+      <div style="margin-top:12px;"><a href="javascript:downloadSampleCSV()" style="font-size:12px;color:#0891b2;text-decoration:underline;">⬇ Télécharger le modèle CSV</a></div>
     </div>
     <div id="csv-preview" style="margin-top:16px;"></div>
   </div>
-
-  <!-- Méthode : IA -->
   <div id="meth-ai" style="display:none;">
     <div style="background:#faf5ff;border-radius:12px;padding:20px;border:1.5px solid #e9d5ff;">
       <p style="font-size:13px;font-weight:700;color:#6d28d9;margin-bottom:8px;">🤖 Génération assistée par IA</p>
-      <p style="font-size:12px;color:#555;margin-bottom:14px;">Décrivez votre lotissement et l'IA va générer automatiquement la liste des lots à importer.</p>
       <div style="display:flex;flex-direction:column;gap:10px;">
-        <textarea id="ai-prompt" rows="4" placeholder="Ex: Lotissement de 24 lots répartis en 4 îlots (A, B, C, D). Lots de type villa avec superficies entre 150 et 300 m², zone R+2, prix entre 350 000 et 600 000 MAD..." style="padding:12px;border:1.5px solid #e9d5ff;border-radius:10px;font-family:inherit;font-size:13px;resize:vertical;width:100%;outline:none;"></textarea>
+        <textarea id="ai-prompt" rows="4" placeholder="Ex: Lotissement de 24 lots répartis en 4 îlots (A, B, C, D)..." style="padding:12px;border:1.5px solid #e9d5ff;border-radius:10px;font-family:inherit;font-size:13px;resize:vertical;width:100%;outline:none;"></textarea>
         <button onclick="generateLotsFromAI()" style="padding:10px 20px;background:linear-gradient(135deg,#7c3aed,#6d28d9);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;align-self:flex-start;">✨ Générer les lots</button>
       </div>
       <div id="ai-status" style="margin-top:12px;"></div>
     </div>
     <div id="ai-preview" style="margin-top:16px;max-height:300px;overflow-y:auto;"></div>
   </div>
-
-  <!-- Pied : bouton d'enregistrement vers Lots & Terrains -->
   <div style="margin-top:20px;padding-top:16px;border-top:2px solid #e5e7eb;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
-    <div style="font-size:13px;color:#555;">
-      <b style="color:#1a1a2e;">${_extractRows.length}</b> lot(s) en attente ·
-      <b style="color:#2d7a3a;">${nbAlreadyInLots}</b> déjà enregistré(s)
-    </div>
+    <div style="font-size:13px;color:#555;"><b style="color:#1a1a2e;">${_extractRows.length}</b> lot(s) en attente · <b style="color:#2d7a3a;">${nbAlreadyInLots}</b> déjà enregistré(s)</div>
     <div style="display:flex;gap:8px;">
       <button onclick="closeExtract()" style="padding:10px 20px;background:#fff;border:1.5px solid #e5e7eb;color:#666;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;">Fermer</button>
-      <button onclick="confirmImportLots()" style="padding:10px 24px;background:linear-gradient(135deg,#1a3e8a,#2563eb);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 3px 10px rgba(26,62,138,.3);">
-        ✅ Enregistrer tous les lots dans Lots &amp; Terrains (${_extractRows.length})
-      </button>
+      <button onclick="confirmImportLots()" style="padding:10px 24px;background:linear-gradient(135deg,#1a3e8a,#2563eb);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;">✅ Enregistrer tous les lots (${_extractRows.length})</button>
     </div>
   </div>`;
 }
 
 function showMethodTab(tab){
   ["manual","csv","ai"].forEach(t=>{
-    const el = document.getElementById("meth-"+t);
-    const btn = document.getElementById("meth-tab-"+t);
-    if(el) el.style.display = (t===tab)?"block":"none";
-    if(btn){
-      btn.style.borderBottomColor = (t===tab)?"#0891b2":"transparent";
-      btn.style.color = (t===tab)?"#0891b2":"#888";
-    }
+    const el=document.getElementById("meth-"+t);
+    const btn=document.getElementById("meth-tab-"+t);
+    if(el) el.style.display=(t===tab)?"block":"none";
+    if(btn){ btn.style.borderBottomColor=(t===tab)?"#0891b2":"transparent"; btn.style.color=(t===tab)?"#0891b2":"#888"; }
   });
 }
 
-// ── Lignes de saisie manuelle ──────────────────────────────────
 function renderExtractRows(){
   if(!_extractRows.length) return `<div style="text-align:center;padding:30px;color:#aaa;font-size:13px;">Cliquez sur "+ Ajouter un lot" pour commencer</div>`;
-  const header=`<div style="display:grid;grid-template-columns:80px 80px 90px 90px 130px 120px 110px 36px;gap:6px;padding:6px 8px;background:#f1f5f9;border-radius:8px;font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;min-width:760px;">
-    <span>N° Lot</span><span>Îlot</span><span>Superf.(m²)</span><span>Zone</span><span>Utilisation</span><span>Statut</span><span>Prix (MAD)</span><span></span>
-  </div>`;
+  const header=`<div style="display:grid;grid-template-columns:80px 80px 90px 90px 130px 120px 110px 36px;gap:6px;padding:6px 8px;background:#f1f5f9;border-radius:8px;font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;min-width:760px;"><span>N° Lot</span><span>Îlot</span><span>Superf.(m²)</span><span>Zone</span><span>Utilisation</span><span>Statut</span><span>Prix (MAD)</span><span></span></div>`;
   const rows=_extractRows.map((r,i)=>`
     <div style="display:grid;grid-template-columns:80px 80px 90px 90px 130px 120px 110px 36px;gap:6px;padding:4px 8px;align-items:center;border-bottom:1px solid #f1f5f9;min-width:760px;">
       <input value="${esc(r.numero_lot||"")}" oninput="_extractRows[${i}].numero_lot=this.value" placeholder="Ex: 01" style="${inpS()}"/>
       <input value="${esc(r.ilot||"")}" oninput="_extractRows[${i}].ilot=this.value" placeholder="A" style="${inpS()}"/>
       <input type="number" value="${r.superficie||""}" oninput="_extractRows[${i}].superficie=Number(this.value)" placeholder="m²" style="${inpS()}"/>
       <input value="${esc(r.zone||"")}" oninput="_extractRows[${i}].zone=this.value" placeholder="R+2" style="${inpS()}"/>
-      <select onchange="_extractRows[${i}].utilisation=this.value" style="${inpS()}font-size:11px;">
-        ${UTILISATION_OPT.map(o=>`<option value="${esc(o)}" ${r.utilisation===o?"selected":""}>${esc(o)}</option>`).join("")}
-      </select>
-      <select onchange="_extractRows[${i}].statut=this.value" style="${inpS()}font-size:11px;">
-        ${STATUT_OPT.map(o=>`<option value="${esc(o)}" ${(r.statut||"Disponible")===o?"selected":""}>${esc(o)}</option>`).join("")}
-      </select>
+      <select onchange="_extractRows[${i}].utilisation=this.value" style="${inpS()}font-size:11px;">${UTILISATION_OPT.map(o=>`<option value="${esc(o)}" ${r.utilisation===o?"selected":""}>${esc(o)}</option>`).join("")}</select>
+      <select onchange="_extractRows[${i}].statut=this.value" style="${inpS()}font-size:11px;">${STATUT_OPT.map(o=>`<option value="${esc(o)}" ${(r.statut||"Disponible")===o?"selected":""}>${esc(o)}</option>`).join("")}</select>
       <input type="number" value="${r.prix||""}" oninput="_extractRows[${i}].prix=Number(this.value)" placeholder="MAD" style="${inpS()}"/>
       <button onclick="removeExtractRow(${i})" style="width:28px;height:28px;background:#fef2f2;border:1px solid #fde8e8;border-radius:6px;color:#c0392b;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;">×</button>
     </div>`).join("");
@@ -874,61 +674,38 @@ function renderExtractRows(){
 }
 function inpS(){ return "padding:5px 8px;border:1.5px solid #e5e7eb;border-radius:6px;font-size:12px;font-family:inherit;width:100%;outline:none;"; }
 
-function addExtractRow(){
-  _extractRows.push({ numero_lot:"", ilot:"", superficie:0, zone:"", utilisation: UTILISATION_OPT[0], statut:"Disponible", prix:0 });
-  refreshExtractRows();
-}
+function addExtractRow(){ _extractRows.push({numero_lot:"",ilot:"",superficie:0,zone:"",utilisation:UTILISATION_OPT[0],statut:"Disponible",prix:0}); refreshExtractRows(); }
 function addMultipleRows(){
-  const n = parseInt(prompt("Combien de lots voulez-vous ajouter ?","10")||"0");
+  const n=parseInt(prompt("Combien de lots ?","10")||"0");
   if(!n||n<1) return;
-  const ilotBase = prompt("Îlot de base (ex: A) :","A")||"";
-  for(let i=1;i<=n;i++){
-    _extractRows.push({ numero_lot:String(i).padStart(2,"0"), ilot:ilotBase, superficie:0, zone:"", utilisation:UTILISATION_OPT[0], statut:"Disponible", prix:0 });
-  }
+  const ilotBase=prompt("Îlot de base :","A")||"";
+  for(let i=1;i<=n;i++) _extractRows.push({numero_lot:String(i).padStart(2,"0"),ilot:ilotBase,superficie:0,zone:"",utilisation:UTILISATION_OPT[0],statut:"Disponible",prix:0});
   refreshExtractRows();
 }
 function removeExtractRow(i){ _extractRows.splice(i,1); refreshExtractRows(); }
 function refreshExtractRows(){
-  const c = document.getElementById("extract-rows-container");
-  if(c) c.innerHTML = renderExtractRows();
-  // Mettre à jour le compteur dans le pied
-  const footer = document.querySelector("#extract-body [style*='border-top:2px']");
-  if(footer){
-    footer.querySelector("div:first-child").innerHTML = `<b style="color:#1a1a2e;">${_extractRows.length}</b> lot(s) en attente · <b style="color:#2d7a3a;">${_extractRows.filter(r=>r._savedId).length}</b> déjà enregistré(s)`;
-    const btn = footer.querySelector("button:last-child");
-    if(btn) btn.textContent=`✅ Enregistrer tous les lots dans Lots & Terrains (${_extractRows.length})`;
-  }
+  const c=document.getElementById("extract-rows-container");
+  if(c) c.innerHTML=renderExtractRows();
 }
 
-// ── Import CSV ────────────────────────────────────────────────
 function parseCsvIntoExtract(input){
-  const file = input.files[0]; if(!file) return;
-  const reader = new FileReader();
-  reader.onload = e=>{
-    const lines = e.target.result.split(/\r?\n/).filter(l=>l.trim());
-    if(lines.length<2){ alert("CSV vide ou invalide."); return; }
-    const headers = lines[0].split(/[;,]/).map(h=>h.trim().toLowerCase().replace(/"/g,""));
-    const col = k => headers.indexOf(k);
+  const file=input.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const lines=e.target.result.split(/\r?\n/).filter(l=>l.trim());
+    if(lines.length<2){ alert("CSV vide."); return; }
+    const headers=lines[0].split(/[;,]/).map(h=>h.trim().toLowerCase().replace(/"/g,""));
+    const col=k=>headers.indexOf(k);
     const parsed=[];
     for(let i=1;i<lines.length;i++){
-      const vals = lines[i].split(/[;,]/).map(v=>v.trim().replace(/^"|"$/g,""));
-      const get = k=>{ const idx=col(k); return idx>=0?vals[idx]||"":""; };
-      const lot={
-        numero_lot: get("numero_lot")||get("lot")||get("n_lot")||String(i),
-        ilot:       get("ilot")||get("bloc")||"A",
-        superficie: Number(get("superficie")||get("surface")||0),
-        zone:       get("zone")||"",
-        utilisation:get("utilisation")||get("usage")||UTILISATION_OPT[0],
-        statut:     get("statut")||"Disponible",
-        prix:       Number(get("prix")||0)
-      };
+      const vals=lines[i].split(/[;,]/).map(v=>v.trim().replace(/^"|"$/g,""));
+      const get=k=>{ const idx=col(k); return idx>=0?vals[idx]||"":""; };
+      const lot={numero_lot:get("numero_lot")||get("lot")||String(i),ilot:get("ilot")||"A",superficie:Number(get("superficie")||0),zone:get("zone")||"",utilisation:get("utilisation")||UTILISATION_OPT[0],statut:get("statut")||"Disponible",prix:Number(get("prix")||0)};
       if(!UTILISATION_OPT.includes(lot.utilisation)) lot.utilisation=UTILISATION_OPT[0];
       if(!STATUT_OPT.includes(lot.statut)) lot.statut="Disponible";
       parsed.push(lot);
     }
-    _extractRows = parsed;
-    document.getElementById("csv-preview").innerHTML=`<div style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;padding:14px 18px;font-size:13px;color:#166534;font-weight:600;">✅ ${parsed.length} lots détectés dans le CSV — Vérifiez puis cliquez sur "Enregistrer".</div>`;
-    // Basculer sur l'onglet manuel pour permettre la vérification
+    _extractRows=parsed;
     showMethodTab("manual");
     document.getElementById("extract-rows-container").innerHTML=renderExtractRows();
     refreshExtractRows();
@@ -937,165 +714,79 @@ function parseCsvIntoExtract(input){
   input.value="";
 }
 
-// ── Télécharger modèle CSV ────────────────────────────────────
 function downloadSampleCSV(){
-  const rows=["numero_lot,ilot,superficie,zone,utilisation,statut,prix",
-    "01,A,200,R+2,Habitat individuel,Disponible,450000",
-    "02,A,180,R+2,Habitat individuel,Disponible,400000",
-    "03,B,250,R+2,Habitat collectif,Disponible,500000"];
+  const rows=["numero_lot,ilot,superficie,zone,utilisation,statut,prix","01,A,200,R+2,Résidentiel,Disponible,450000","02,A,180,R+2,Résidentiel,Disponible,400000"];
   const blob=new Blob([rows.join("\n")],{type:"text/csv"});
   const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="modele_lots.csv"; a.click();
 }
 
-// ── Génération par IA (Claude API) ───────────────────────────
 async function generateLotsFromAI(){
-  const prompt = document.getElementById("ai-prompt").value.trim();
-  if(!prompt){ alert("Veuillez décrire votre lotissement."); return; }
-  const status = document.getElementById("ai-status");
-  const preview = document.getElementById("ai-preview");
-  status.innerHTML=`<div style="display:flex;align-items:center;gap:10px;color:#7c3aed;font-size:13px;font-weight:600;padding:10px;background:#faf5ff;border-radius:8px;">
-    <span style="animation:spin 1s linear infinite;display:inline-block">⏳</span> L'IA génère les lots…
-  </div>`;
-  preview.innerHTML="";
+  const prompt=document.getElementById("ai-prompt").value.trim();
+  if(!prompt){ alert("Décrivez votre lotissement."); return; }
+  const status=document.getElementById("ai-status");
+  status.innerHTML=`<div style="color:#7c3aed;font-size:13px;font-weight:600;padding:10px;background:#faf5ff;border-radius:8px;">⏳ L'IA génère les lots…</div>`;
   try{
-    const res = await fetch("https://api.anthropic.com/v1/messages",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({
-        model:"claude-sonnet-4-20250514",
-        max_tokens:1000,
-        system:`Tu es un expert en lotissement immobilier marocain. À partir de la description d'un lotissement, génère UNIQUEMENT un tableau JSON valide (sans markdown, sans backticks, sans texte avant ou après) représentant les lots.
-Format JSON attendu (tableau) :
-[{"numero_lot":"01","ilot":"A","superficie":200,"zone":"R+2","utilisation":"Habitat individuel","statut":"Disponible","prix":450000},...]
-Utilisation possible : ${UTILISATION_OPT.join(", ")}
-Statut possible : ${STATUT_OPT.join(", ")}
-Réponds SEULEMENT avec le JSON, rien d'autre.`,
-        messages:[{role:"user",content:prompt}]
-      })
-    });
-    const data = await res.json();
-    const text = (data.content||[]).map(b=>b.text||"").join("").trim();
+    const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,system:`Tu es un expert en lotissement. Génère UNIQUEMENT un JSON valide (tableau) avec les lots. Format: [{"numero_lot":"01","ilot":"A","superficie":200,"zone":"R+2","utilisation":"Résidentiel","statut":"Disponible","prix":450000},...] Réponds SEULEMENT avec le JSON.`,messages:[{role:"user",content:prompt}]})});
+    const data=await res.json();
+    const text=(data.content||[]).map(b=>b.text||"").join("").trim();
     let parsed;
-    try{ parsed = JSON.parse(text); }
-    catch(e){
-      const match = text.match(/\[[\s\S]*\]/);
-      if(!match) throw new Error("JSON introuvable dans la réponse IA.");
-      parsed = JSON.parse(match[0]);
-    }
+    try{ parsed=JSON.parse(text); } catch(e){ const m=text.match(/\[[\s\S]*\]/); if(!m) throw new Error("JSON introuvable"); parsed=JSON.parse(m[0]); }
     if(!Array.isArray(parsed)||!parsed.length) throw new Error("Aucun lot généré.");
-    parsed.forEach(l=>{
-      if(!UTILISATION_OPT.includes(l.utilisation)) l.utilisation=UTILISATION_OPT[0];
-      if(!STATUT_OPT.includes(l.statut)) l.statut="Disponible";
-    });
-    _extractRows = parsed;
-    status.innerHTML=`<div style="color:#166534;font-size:13px;font-weight:600;padding:10px;background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:8px;">✅ ${parsed.length} lots générés ! Vérifiez et corrigez si nécessaire.</div>`;
+    _extractRows=parsed;
+    status.innerHTML=`<div style="color:#166534;font-size:13px;font-weight:600;padding:10px;background:#f0fdf4;border-radius:8px;">✅ ${parsed.length} lots générés !</div>`;
     showMethodTab("manual");
     document.getElementById("extract-rows-container").innerHTML=renderExtractRows();
     refreshExtractRows();
   }catch(err){
-    status.innerHTML=`<div style="color:#c0392b;font-size:13px;font-weight:600;padding:10px;background:#fef2f2;border:1.5px solid #fde8e8;border-radius:8px;">❌ Erreur : ${esc(err.message)}</div>`;
+    status.innerHTML=`<div style="color:#c0392b;font-size:13px;padding:10px;background:#fef2f2;border-radius:8px;">❌ Erreur : ${esc(err.message)}</div>`;
   }
 }
 
-// ── Confirmation : enregistrer dans Lots & Terrains ───────────
 function confirmImportLots(){
-  const invalides = _extractRows.filter(r=>!r.numero_lot||!r.ilot||!r.superficie);
-  if(invalides.length){
-    alert(`⚠️ ${invalides.length} lot(s) ont des données manquantes (N° lot, Îlot ou Superficie obligatoires).\nVeuillez compléter avant d'enregistrer.`);
-    return;
-  }
-  const plan = plans.find(p=>p.id===_extractPlanId); if(!plan) return;
-
-  let nouveau=0, mis_a_jour=0;
+  const invalides=_extractRows.filter(r=>!r.numero_lot||!r.ilot||!r.superficie);
+  if(invalides.length){ alert(`⚠️ ${invalides.length} lot(s) ont des données manquantes.`); return; }
+  const plan=plans.find(p=>p.id===_extractPlanId); if(!plan) return;
+  let nouveau=0,mis_a_jour=0;
   _extractRows.forEach(row=>{
-    // Chercher si ce lot existe déjà (même numero_lot + ilot)
-    const existing = lots.find(l=>l.numero_lot===row.numero_lot && l.ilot===row.ilot);
-    if(existing){
-      Object.assign(existing,{
-        superficie: row.superficie||existing.superficie,
-        zone: row.zone||existing.zone,
-        utilisation: row.utilisation||existing.utilisation,
-        statut: row.statut||existing.statut,
-        prix: row.prix||existing.prix,
-        plan_source: plan.nom
-      });
-      row._savedId = existing.id;
-      mis_a_jour++;
-    } else {
-      const newId = genId("L");
-      lots.push({
-        id: newId,
-        numero_lot: row.numero_lot,
-        ilot: row.ilot,
-        superficie: row.superficie,
-        zone: row.zone||"",
-        utilisation: row.utilisation||UTILISATION_OPT[0],
-        statut: row.statut||"Disponible",
-        prix: row.prix||0,
-        plan_source: plan.nom
-      });
-      row._savedId = newId;
-      nouveau++;
-    }
+    const existing=lots.find(l=>l.numero_lot===row.numero_lot&&l.ilot===row.ilot);
+    if(existing){ Object.assign(existing,{superficie:row.superficie||existing.superficie,zone:row.zone||existing.zone,utilisation:row.utilisation||existing.utilisation,statut:row.statut||existing.statut,prix:row.prix||existing.prix,plan_source:plan.nom}); row._savedId=existing.id; mis_a_jour++; }
+    else{ const newId=genId("L"); lots.push({id:newId,numero_lot:row.numero_lot,ilot:row.ilot,superficie:row.superficie,zone:row.zone||"",utilisation:row.utilisation||UTILISATION_OPT[0],statut:row.statut||"Disponible",prix:row.prix||0,plan_source:plan.nom}); row._savedId=newId; nouveau++; }
   });
-
-  // Sauvegarder les lots extraits dans le plan
-  plan.lotsExtraits = _extractRows.map(r=>({...r}));
-  savePlans();
-  saveData(); renderAll();
-
-  // Feedback
-  const body = document.getElementById("extract-body");
-  const msg = document.createElement("div");
-  msg.style.cssText="position:sticky;top:0;z-index:10;background:linear-gradient(135deg,#dcfce7,#bbf7d0);border:1.5px solid #86efac;border-radius:12px;padding:16px 20px;margin-bottom:16px;font-size:14px;font-weight:700;color:#166534;display:flex;align-items:center;gap:10px;";
-  msg.innerHTML=`✅ Importation réussie ! <span style="font-weight:400">${nouveau} nouveau(x) lot(s) créé(s), ${mis_a_jour} mis à jour dans Lots &amp; Terrains.</span>`;
-  body.insertBefore(msg, body.firstChild);
+  plan.lotsExtraits=_extractRows.map(r=>({...r}));
+  savePlans(); saveData(); renderAll();
+  alert(`✅ ${nouveau} nouveau(x) lot(s) créé(s), ${mis_a_jour} mis à jour.`);
   renderPlans();
-  setTimeout(()=>msg.remove(),5000);
 }
 
-// ── Import CSV global (hors modal) ────────────────────────────
 function importLotsCSV(input){
-  const file = input.files[0]; if(!file) return;
-  _extractPlanId = plans[0]?.id || null;
-  if(!_extractPlanId){
-    alert("Veuillez d'abord téléverser un plan DWG pour associer ce CSV.");
-    input.value=""; return;
-  }
+  const file=input.files[0]; if(!file) return;
+  _extractPlanId=plans[0]?.id||null;
+  if(!_extractPlanId){ alert("Téléversez d'abord un plan DWG."); input.value=""; return; }
   document.getElementById("extract-plan-name").textContent="Plan : "+plans[0].nom;
   document.getElementById("extract-overlay").style.display="flex";
-  _extractRows = [];
-  renderExtractBody();
-  showMethodTab("csv");
-  // Lancer le parsing
-  const fakeInput={files:[file]}; parseCsvIntoExtract(fakeInput);
+  _extractRows=[]; renderExtractBody(); showMethodTab("csv");
+  parseCsvIntoExtract({files:[file]});
   input.value="";
 }
 
-// ── Drag & drop + init ────────────────────────────────────────
 document.addEventListener("DOMContentLoaded",function(){
-  const dz = document.getElementById("plan-drop-zone");
+  const dz=document.getElementById("plan-drop-zone");
   if(!dz) return;
-  dz.addEventListener("dragover",e=>{ e.preventDefault(); dz.style.borderColor="#0891b2"; dz.style.background="#e0f7fa"; });
-  dz.addEventListener("dragleave",()=>{ dz.style.borderColor="#a5f3fc"; dz.style.background="#f0fdfe"; });
-  dz.addEventListener("drop",e=>{ e.preventDefault(); dz.style.borderColor="#a5f3fc"; dz.style.background="#f0fdfe"; handlePlanFiles(e.dataTransfer.files); });
+  dz.addEventListener("dragover",e=>{ e.preventDefault(); dz.style.borderColor="#0891b2"; });
+  dz.addEventListener("dragleave",()=>{ dz.style.borderColor="#a5f3fc"; });
+  dz.addEventListener("drop",e=>{ e.preventDefault(); dz.style.borderColor="#a5f3fc"; handlePlanFiles(e.dataTransfer.files); });
   renderPlans();
 });
 
-// ══════════════════════════════════════════════════════════════
-// RENDU TABLEAU PRINCIPAL
-// ══════════════════════════════════════════════════════════════
+// ── Rendu Principal ──
 function renderPrincipal(){
-  const q = (document.getElementById("search-input").value||"").toLowerCase();
-  const tb = document.getElementById("tb-principal");
-  document.getElementById("dos-count").textContent = dossiers.length+" dossier(s)";
-  const rows = dossiers.map(d=>{
-    const a = acheteurs.find(x=>x.id===d.acheteur_id);
-    const l = lots.find(x=>x.id===d.lot_id);
-    if(q){
-      const hay = [a?.nom,a?.prenom,a?.cin,l?.numero_lot,l?.ilot].map(v=>(v||"").toLowerCase()).join(" ");
-      if(!hay.includes(q)) return "";
-    }
+  const q=(document.getElementById("search-input").value||"").toLowerCase();
+  const tb=document.getElementById("tb-principal");
+  document.getElementById("dos-count").textContent=dossiers.length+" dossier(s)";
+  const rows=dossiers.map(d=>{
+    const a=acheteurs.find(x=>x.id===d.acheteur_id);
+    const l=lots.find(x=>x.id===d.lot_id);
+    if(q){ const hay=[a?.nom,a?.prenom,a?.cin,l?.numero_lot,l?.ilot].map(v=>(v||"").toLowerCase()).join(" "); if(!hay.includes(q)) return ""; }
     return `<tr>
       <td class="dos-id">${esc(d.id)}</td>
       <td class="buyer-name">${a?esc(a.nom)+" "+esc(a.prenom):'<span style="color:#f87171">Introuvable</span>'}</td>
@@ -1107,48 +798,28 @@ function renderPrincipal(){
       <td>${l?badge(l.statut):"—"}</td>
       <td style="font-size:12px;color:#555">${d.prix?Number(d.prix).toLocaleString("fr-MA"):"—"}</td>
       <td style="font-size:12px;color:#555">${esc(d.date_attribution||"—")}</td>
-      <td><div style="display:flex;gap:6px">
-        <button class="btn btn-sm btn-edit" onclick="openModal('dossier','${d.id}')">✏️</button>
-        <button class="btn btn-sm btn-del"  onclick="deleteItem('dossier','${d.id}')">🗑</button>
-      </div></td>
+      <td><div style="display:flex;gap:6px"><button class="btn btn-sm btn-edit" onclick="openModal('dossier','${d.id}')">✏️</button><button class="btn btn-sm btn-del" onclick="deleteItem('dossier','${d.id}')">🗑</button></div></td>
     </tr>`;
   }).join("");
-  tb.innerHTML = rows||`<tr class="empty-row"><td colspan="11">Aucun dossier enregistré — cliquez sur « Nouveau dossier » pour commencer</td></tr>`;
+  tb.innerHTML=rows||`<tr class="empty-row"><td colspan="11">Aucun dossier — cliquez sur « Nouveau dossier »</td></tr>`;
 }
 
-// ══════════════════════════════════════════════════════════════
-// RENDU ACHETEURS (cartes)
-// ══════════════════════════════════════════════════════════════
+// ── Rendu Acheteurs ──
 function renderAcheteurs(){
-  document.getElementById("achet-count").textContent = acheteurs.length+" acheteur(s)";
-  const wrap = document.getElementById("cards-acheteurs");
-  if(!acheteurs.length){
-    wrap.innerHTML='<div style="grid-column:1/-1;padding:40px;text-align:center;color:#aaa;font-size:14px;background:#fff;border-radius:14px">Aucun acheteur enregistré</div>';
-    return;
-  }
-  wrap.innerHTML = acheteurs.map(a=>{
-    const nb = dossiers.filter(d=>d.acheteur_id===a.id).length;
-    const piecesHtml = a.pieces?.length ? `
-      <div class="pieces-title">Pièces justificatives (${a.pieces.length})</div>
-      <div class="pieces-wrap">${a.pieces.map(p=>`<span class="piece-tag">✓ ${esc(p)}</span>`).join("")}</div>` : "";
-    const attachHtml = a.attachments?.length ? `
-      <div class="pieces-title" style="margin-top:8px">📎 Fichiers joints (${a.attachments.length})</div>
-      <div class="attach-list">${a.attachments.map((f,i)=>`<div class="attach-item">
-        <span style="font-size:14px">${f.type&&f.type.includes('image')?'🖼️':'📄'}</span>
-        <span class="a-name">${esc(f.name)}</span>
-        <span class="a-size">${formatSize(f.size)}</span>
-        <span class="a-view" onclick="viewAttachment('${a.id}',${i})">Voir</span>
-      </div>`).join("")}</div>` : "";
+  document.getElementById("achet-count").textContent=acheteurs.length+" acheteur(s)";
+  const wrap=document.getElementById("cards-acheteurs");
+  if(!acheteurs.length){ wrap.innerHTML='<div style="grid-column:1/-1;padding:40px;text-align:center;color:#aaa;font-size:14px;background:#fff;border-radius:14px">Aucun acheteur</div>'; return; }
+  wrap.innerHTML=acheteurs.map(a=>{
+    const nb=dossiers.filter(d=>d.acheteur_id===a.id).length;
+    const piecesHtml=a.pieces?.length?`<div class="pieces-title">Pièces (${a.pieces.length})</div><div class="pieces-wrap">${a.pieces.map(p=>`<span class="piece-tag">✓ ${esc(p)}</span>`).join("")}</div>`:"";
+    const attachHtml=a.attachments?.length?`<div class="pieces-title" style="margin-top:8px">📎 Fichiers (${a.attachments.length})</div><div class="attach-list">${a.attachments.map((f,i)=>`<div class="attach-item"><span>${f.type&&f.type.includes('image')?'🖼️':'📄'}</span><span class="a-name">${esc(f.name)}</span><span class="a-size">${formatSize(f.size)}</span><span class="a-view" onclick="viewAttachment('${a.id}',${i})">Voir</span></div>`).join("")}</div>`:"";
     return `<div class="card">
       <div class="card-header">
-        <div>
-          <div class="card-name">${esc(a.nom)} ${esc(a.prenom)}</div>
-          <div class="card-cin">CIN : ${esc(a.cin)}</div>
-        </div>
+        <div><div class="card-name">${esc(a.nom)} ${esc(a.prenom)}</div><div class="card-cin">CIN : ${esc(a.cin)}</div></div>
         <div style="display:flex;gap:6px">
-          <button class="btn btn-sm btn-receipt" onclick="imprimerRecuAcheteur('${a.id}')" title="Imprimer reçu PDF">🧾</button>
+          <button class="btn btn-sm btn-receipt" onclick="imprimerRecuAcheteur('${a.id}')" title="Imprimer reçu">🧾</button>
           <button class="btn btn-sm btn-edit" onclick="openModal('acheteur','${a.id}')">✏️</button>
-          <button class="btn btn-sm btn-del"  onclick="deleteItem('acheteur','${a.id}')">🗑</button>
+          <button class="btn btn-sm btn-del" onclick="deleteItem('acheteur','${a.id}')">🗑</button>
         </div>
       </div>
       <div class="card-body">
@@ -1156,959 +827,340 @@ function renderAcheteurs(){
         <div class="card-row"><span class="card-lbl">📞 Téléphone</span><span class="card-val">${esc(a.telephone||"—")}</span></div>
         <div class="card-row"><span class="card-lbl">✉️ Email</span><span class="card-val">${esc(a.email||"—")}</span></div>
         <div class="card-row"><span class="card-lbl">📍 Adresse</span><span class="card-val">${esc(a.adresse||"—")}</span></div>
-        ${piecesHtml}
-        ${attachHtml}
+        ${piecesHtml}${attachHtml}
         <div class="dossier-info">📁 ${nb} dossier(s) lié(s)</div>
       </div>
     </div>`;
   }).join("");
 }
 
-// ══════════════════════════════════════════════════════════════
-// RENDU LOTS
-// ══════════════════════════════════════════════════════════════
+// ── Rendu Lots ──
 function renderLots(){
-  document.getElementById("lots-count").textContent = lots.length+" lot(s)";
-  const tb = document.getElementById("tb-lots");
-  if(!lots.length){
-    tb.innerHTML='<tr class="empty-row"><td colspan="10">Aucun lot enregistré</td></tr>'; return;
-  }
-  tb.innerHTML = lots.map(l=>{
-    const dos = dossiers.find(d=>d.lot_id===l.id);
-    const achet = dos ? acheteurs.find(a=>a.id===dos.acheteur_id) : null;
+  document.getElementById("lots-count").textContent=lots.length+" lot(s)";
+  const tb=document.getElementById("tb-lots");
+  if(!lots.length){ tb.innerHTML='<tr class="empty-row"><td colspan="10">Aucun lot</td></tr>'; return; }
+  tb.innerHTML=lots.map(l=>{
+    const dos=dossiers.find(d=>d.lot_id===l.id);
+    const achet=dos?acheteurs.find(a=>a.id===dos.acheteur_id):null;
     return `<tr>
       <td class="lot-id">${esc(l.id)}</td>
       <td style="font-size:14px;font-weight:700;color:#1a1a2e">Lot ${esc(l.numero_lot)}</td>
       <td><span class="ilot-badge">Îlot ${esc(l.ilot)}</span></td>
       <td style="font-size:12px;color:#555">${esc(l.zone||"—")}</td>
-      <td style="font-size:13px;font-weight:600;color:#1a1a2e">${l.superficie} m²</td>
+      <td style="font-size:13px;font-weight:600">${l.superficie} m²</td>
       <td style="font-size:12px;color:#555">${esc(l.utilisation||"—")}</td>
       <td>${badge(l.statut)}</td>
       <td style="font-size:12px;color:${achet?"#2d7a3a":"#aaa"};font-weight:${achet?600:400}">${achet?esc(achet.nom)+" "+esc(achet.prenom):"Non attribué"}</td>
       <td style="font-size:13px;font-weight:600;color:#8b6914">${l.prix?Number(l.prix).toLocaleString("fr-MA")+" MAD":"—"}</td>
-      <td><div style="display:flex;gap:6px">
-        <button class="btn btn-sm btn-edit" onclick="openModal('lot','${l.id}')">✏️</button>
-        <button class="btn btn-sm btn-del"  onclick="deleteItem('lot','${l.id}')">🗑</button>
-      </div></td>
+      <td><div style="display:flex;gap:6px"><button class="btn btn-sm btn-edit" onclick="openModal('lot','${l.id}')">✏️</button><button class="btn btn-sm btn-del" onclick="deleteItem('lot','${l.id}')">🗑</button></div></td>
     </tr>`;
   }).join("");
 }
 
 function renderAll(){ updateStats(); renderPrincipal(); renderAcheteurs(); renderLots(); }
 
-// ══════════════════════════════════════════════════════════════
-// SUPPRIMER
-// ══════════════════════════════════════════════════════════════
 function deleteItem(type,id){
   if(!confirm("Confirmer la suppression ?")) return;
-  if(type==="acheteur") acheteurs = acheteurs.filter(x=>x.id!==id);
-  if(type==="lot")      lots      = lots.filter(x=>x.id!==id);
-  if(type==="dossier")  dossiers  = dossiers.filter(x=>x.id!==id);
-  renderAll();
+  if(type==="acheteur") acheteurs=acheteurs.filter(x=>x.id!==id);
+  if(type==="lot")      lots=lots.filter(x=>x.id!==id);
+  if(type==="dossier")  dossiers=dossiers.filter(x=>x.id!==id);
+  renderAll(); sauvegarder();
 }
 
-// ══════════════════════════════════════════════════════════════
-// MODAL
-// ══════════════════════════════════════════════════════════════
-function openModal(type, id){
-  editMode = id ? { type, id } : null;
-  const overlay = document.getElementById("modal-overlay");
-  const title   = document.getElementById("modal-title");
-  const body    = document.getElementById("modal-body");
+// ── Modal ──
+function openModal(type,id){
+  editMode=id?{type,id}:null;
+  const overlay=document.getElementById("modal-overlay");
+  const title=document.getElementById("modal-title");
+  const body=document.getElementById("modal-body");
   overlay.classList.add("open");
-
   if(type==="acheteur"){
-    const a = id ? acheteurs.find(x=>x.id===id) : {};
-    title.textContent = id ? "Modifier l'acheteur" : "Nouvel acheteur";
-    body.innerHTML = buildFormAcheteur(a||{});
-    (a?.pieces||[]).forEach(p=>{ const el=document.querySelector(`.piece-check[data-p="${p}"]`); if(el) el.classList.add("checked"); });
+    const a=id?acheteurs.find(x=>x.id===id):{};
+    title.textContent=id?"Modifier l'acheteur":"Nouvel acheteur";
+    body.innerHTML=buildFormAcheteur(a||{});
   } else if(type==="lot"){
-    const l = id ? lots.find(x=>x.id===id) : {};
-    title.textContent = id ? "Modifier le lot" : "Nouveau lot";
-    body.innerHTML = buildFormLot(l||{});
+    const l=id?lots.find(x=>x.id===id):{};
+    title.textContent=id?"Modifier le lot":"Nouveau lot";
+    body.innerHTML=buildFormLot(l||{});
   } else if(type==="dossier"){
-    const d = id ? dossiers.find(x=>x.id===id) : {};
-    title.textContent = id ? "Modifier le dossier" : "Nouveau dossier d'attribution";
-    body.innerHTML = buildFormDossier(d||{});
+    const d=id?dossiers.find(x=>x.id===id):{};
+    title.textContent=id?"Modifier le dossier":"Nouveau dossier d'attribution";
+    body.innerHTML=buildFormDossier(d||{});
   }
 }
-function closeModal(){
-  document.getElementById("modal-overlay").classList.remove("open");
-  editMode=null;
-}
+function closeModal(){ document.getElementById("modal-overlay").classList.remove("open"); editMode=null; }
 
-// ── Formulaires HTML ───────────────────────────────────────────
-function fld(label, id, type="text", val="", req=false){
-  return `<div class="form-field">
-    <label for="${id}">${label}${req?'<span class="req"> *</span>':''}</label>
-    <input type="${type}" id="${id}" value="${esc(val||"")}"/>
-  </div>`;
+function fld(label,id,type="text",val="",req=false){
+  return `<div class="form-field"><label for="${id}">${label}${req?'<span class="req"> *</span>':''}</label><input type="${type}" id="${id}" value="${esc(val||"")}"/></div>`;
 }
-function sel(label, id, options, val="", req=false){
-  const opts = options.map(o=>`<option value="${esc(o)}" ${val===o?"selected":""}>${esc(o)}</option>`).join("");
-  return `<div class="form-field">
-    <label for="${id}">${label}${req?'<span class="req"> *</span>':''}</label>
-    <select id="${id}"><option value="">— Sélectionner —</option>${opts}</select>
-  </div>`;
+function sel(label,id,options,val="",req=false){
+  const opts=options.map(o=>`<option value="${esc(o)}" ${val===o?"selected":""}>${esc(o)}</option>`).join("");
+  return `<div class="form-field"><label for="${id}">${label}${req?'<span class="req"> *</span>':''}</label><select id="${id}"><option value="">— Sélectionner —</option>${opts}</select></div>`;
 }
 
 function buildFormAcheteur(a){
-  const pieces = PIECES_OPTIONS.map(p=>`<div class="piece-check${(a.pieces||[]).includes(p)?" checked":""}" data-p="${esc(p)}" onclick="togglePiece(this)">${(a.pieces||[]).includes(p)?"✓ ":""}${esc(p)}</div>`).join("");
-  // Reset pending attachments and pre-load existing ones
-  window._pendingAttachments = (a.attachments||[]).map(f=>({...f}));
-  const attachPreview = renderAttachPreview();
+  const pieces=PIECES_OPTIONS.map(p=>`<div class="piece-check${(a.pieces||[]).includes(p)?" checked":""}" data-p="${esc(p)}" onclick="togglePiece(this)">${(a.pieces||[]).includes(p)?"✓ ":""}${esc(p)}</div>`).join("");
+  window._pendingAttachments=(a.attachments||[]).map(f=>({...f}));
   return `<div class="form-grid">
-    ${fld("Nom","f-nom","text",a.nom,true)}
-    ${fld("Prénom","f-prenom","text",a.prenom,true)}
-    ${fld("N° CIN","f-cin","text",a.cin,true)}
-    ${fld("Date de naissance","f-dob","date",a.date_naissance)}
-    ${fld("Téléphone","f-tel","text",a.telephone)}
-    ${fld("Email","f-email","email",a.email)}
-    <div class="form-field form-full">${fld("Adresse complète","f-adr","text",a.adresse)}</div>
+    ${fld("Nom","f-nom","text",a.nom,true)}${fld("Prénom","f-prenom","text",a.prenom,true)}
+    ${fld("N° CIN","f-cin","text",a.cin,true)}${fld("Date de naissance","f-dob","date",a.date_naissance)}
+    ${fld("Téléphone","f-tel","text",a.telephone)}${fld("Email","f-email","email",a.email)}
+    <div class="form-field form-full">${fld("Adresse","f-adr","text",a.adresse)}</div>
   </div>
   <div style="margin-top:16px">
-    <label style="font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:8px">Pièces justificatives cochées</label>
+    <label style="font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:8px">Pièces justificatives</label>
     <div class="pieces-check-wrap">${pieces}</div>
   </div>
   <div style="margin-top:16px">
-    <label style="font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:8px">📎 Pièces jointes (scan, photo, PDF)</label>
-    <div class="file-drop-zone" id="file-drop-zone">
-      <input type="file" id="f-attachments" multiple accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" onchange="handleFileSelect(this)"/>
-      <div>📁 Cliquez pour ajouter des fichiers</div>
-      <div style="font-size:10px;margin-top:4px;color:#bbb">PDF, JPG, PNG — max 3 Mo par fichier</div>
-    </div>
-    <div id="attach-preview">${attachPreview}</div>
+    <label style="font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:8px">📎 Pièces jointes</label>
+    <div class="file-drop-zone"><input type="file" id="f-attachments" multiple accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" onchange="handleFileSelect(this)"/><div>📁 Cliquez pour ajouter des fichiers</div></div>
+    <div id="attach-preview">${renderAttachPreview()}</div>
   </div>
-  <div class="form-actions">
-    <button class="btn btn-ghost" onclick="closeModal()">Annuler</button>
-    <button class="btn btn-gold" onclick="saveAcheteur()">Enregistrer</button>
-  </div>`;
+  <div class="form-actions"><button class="btn btn-ghost" onclick="closeModal()">Annuler</button><button class="btn btn-gold" onclick="saveAcheteur()">Enregistrer</button></div>`;
 }
 
 function buildFormLot(l){
   return `<div class="form-grid">
-    ${fld("N° Lot","f-lot","text",l.numero_lot,true)}
-    ${fld("Îlot","f-ilot","text",l.ilot,true)}
-    ${fld("Superficie (m²)","f-sup","number",l.superficie,true)}
-    ${fld("Zone","f-zone","text",l.zone)}
-    ${sel("Utilisation du terrain","f-util",UTILISATION_OPT,l.utilisation,true)}
-    ${sel("Statut du terrain","f-stat",STATUT_OPT,l.statut||"Disponible",true)}
-    ${fld("Prix du lot (MAD)","f-prix-lot","number",l.prix||"")}
+    ${fld("N° Lot","f-lot","text",l.numero_lot,true)}${fld("Îlot","f-ilot","text",l.ilot,true)}
+    ${fld("Superficie (m²)","f-sup","number",l.superficie,true)}${fld("Zone","f-zone","text",l.zone)}
+    ${sel("Utilisation","f-util",UTILISATION_OPT,l.utilisation,true)}${sel("Statut","f-stat",STATUT_OPT,l.statut||"Disponible",true)}
+    ${fld("Prix (MAD)","f-prix-lot","number",l.prix||"")}
   </div>
-  <div class="form-actions">
-    <button class="btn btn-ghost" onclick="closeModal()">Annuler</button>
-    <button class="btn btn-blue" onclick="saveLot()">Enregistrer</button>
-  </div>`;
+  <div class="form-actions"><button class="btn btn-ghost" onclick="closeModal()">Annuler</button><button class="btn btn-blue" onclick="saveLot()">Enregistrer</button></div>`;
 }
 
 function buildFormDossier(d){
-  const optA = acheteurs.map(a=>`<option value="${a.id}" ${d.acheteur_id===a.id?"selected":""}>${esc(a.nom)} ${esc(a.prenom)} (${esc(a.cin)})</option>`).join("");
-  const optL = lots.map(l=>`<option value="${l.id}" ${d.lot_id===l.id?"selected":""}> Lot ${esc(l.numero_lot)} – Îlot ${esc(l.ilot)} (${l.superficie}m²)</option>`).join("");
+  const optA=acheteurs.map(a=>`<option value="${a.id}" ${d.acheteur_id===a.id?"selected":""}>${esc(a.nom)} ${esc(a.prenom)} (${esc(a.cin)})</option>`).join("");
+  const optL=lots.map(l=>`<option value="${l.id}" ${d.lot_id===l.id?"selected":""}>Lot ${esc(l.numero_lot)} – Îlot ${esc(l.ilot)} (${l.superficie}m²)</option>`).join("");
   return `<div class="form-grid">
     <div class="form-field"><label for="f-achet">Acheteur <span class="req">*</span></label><select id="f-achet"><option value="">— Sélectionner —</option>${optA}</select></div>
     <div class="form-field"><label for="f-lotid">Lot <span class="req">*</span></label><select id="f-lotid"><option value="">— Sélectionner —</option>${optL}</select></div>
-    ${fld("Date d'attribution","f-date","date",d.date_attribution)}
-    ${fld("Prix (MAD)","f-prix","number",d.prix)}
-    <div class="form-field form-full">${fld("Notes / Observations","f-notes","text",d.notes)}</div>
+    ${fld("Date d'attribution","f-date","date",d.date_attribution)}${fld("Prix (MAD)","f-prix","number",d.prix)}
+    <div class="form-field form-full">${fld("Notes","f-notes","text",d.notes)}</div>
   </div>
-  <div class="form-actions">
-    <button class="btn btn-ghost" onclick="closeModal()">Annuler</button>
-    <button class="btn btn-green" onclick="saveDossier()">Enregistrer</button>
-  </div>`;
+  <div class="form-actions"><button class="btn btn-ghost" onclick="closeModal()">Annuler</button><button class="btn btn-green" onclick="saveDossier()">Enregistrer</button></div>`;
 }
 
-// ── Pièces toggle ──
 function togglePiece(el){
   el.classList.toggle("checked");
-  el.textContent = el.classList.contains("checked") ? "✓ "+el.dataset.p : el.dataset.p;
+  el.textContent=el.classList.contains("checked")?"✓ "+el.dataset.p:el.dataset.p;
 }
 
-// ── Pièces jointes ────────────────────────────────────────────
-window._pendingAttachments = [];
-
-function formatSize(bytes){
-  if(!bytes) return "";
-  if(bytes < 1024) return bytes+"B";
-  if(bytes < 1048576) return (bytes/1024).toFixed(1)+"Ko";
-  return (bytes/1048576).toFixed(1)+"Mo";
-}
-
+window._pendingAttachments=[];
+function formatSize(bytes){ if(!bytes) return ""; if(bytes<1024) return bytes+"B"; if(bytes<1048576) return (bytes/1024).toFixed(1)+"Ko"; return (bytes/1048576).toFixed(1)+"Mo"; }
 function renderAttachPreview(){
   if(!window._pendingAttachments.length) return "";
-  return `<div class="attach-list">${window._pendingAttachments.map((f,i)=>`
-    <div class="attach-item">
-      <span style="font-size:14px">${f.type&&f.type.includes('image')?'🖼️':'📄'}</span>
-      <span class="a-name">${esc(f.name)}</span>
-      <span class="a-size">${formatSize(f.size)}</span>
-      <span class="a-del" onclick="removeAttach(${i})" title="Supprimer">×</span>
-    </div>`).join("")}</div>`;
+  return `<div class="attach-list">${window._pendingAttachments.map((f,i)=>`<div class="attach-item"><span>${f.type&&f.type.includes('image')?'🖼️':'📄'}</span><span class="a-name">${esc(f.name)}</span><span class="a-size">${formatSize(f.size)}</span><span class="a-del" onclick="removeAttach(${i})">×</span></div>`).join("")}</div>`;
 }
-
-function refreshAttachPreview(){
-  const el = document.getElementById("attach-preview");
-  if(el) el.innerHTML = renderAttachPreview();
-}
-
-function removeAttach(idx){
-  window._pendingAttachments.splice(idx,1);
-  refreshAttachPreview();
-}
-
-function viewAttachment(acheteurId, idx){
-  const a = acheteurs.find(x=>x.id===acheteurId);
-  if(!a||!a.attachments||!a.attachments[idx]) return;
-  const f = a.attachments[idx];
-  if(!f.data){ alert("Données du fichier non disponibles."); return; }
-  const win = window.open("","_blank");
-  if(f.type&&f.type.includes('image')){
-    win.document.write(`<html><body style="margin:0;background:#111;display:flex;align-items:center;justify-content:center;min-height:100vh"><img src="${f.data}" style="max-width:100%;max-height:100vh"/></body></html>`);
-  } else {
-    const link = win.document.createElement("a");
-    link.href = f.data; link.download = f.name; link.click();
-    win.close();
-  }
-}
-
+function refreshAttachPreview(){ const el=document.getElementById("attach-preview"); if(el) el.innerHTML=renderAttachPreview(); }
+function removeAttach(idx){ window._pendingAttachments.splice(idx,1); refreshAttachPreview(); }
+function viewAttachment(acheteurId,idx){ const a=acheteurs.find(x=>x.id===acheteurId); if(!a||!a.attachments||!a.attachments[idx]) return; const f=a.attachments[idx]; if(!f.data){ alert("Données non disponibles."); return; } const win=window.open("","_blank"); if(f.type&&f.type.includes('image')){ win.document.write(`<html><body style="margin:0;background:#111;display:flex;align-items:center;justify-content:center;min-height:100vh"><img src="${f.data}" style="max-width:100%;max-height:100vh"/></body></html>`); } else { const link=win.document.createElement("a"); link.href=f.data; link.download=f.name; link.click(); win.close(); } }
 function handleFileSelect(input){
-  const files = Array.from(input.files);
+  const files=Array.from(input.files);
   if(!files.length) return;
-  const preview = document.getElementById("attach-preview");
-  const MAX = 3*1024*1024; // 3Mo
-  let reading = 0;
+  const MAX=3*1024*1024;
   files.forEach(file=>{
-    if(file.size > MAX){ alert(`⚠️ "${file.name}" dépasse 3 Mo et sera ignoré.`); return; }
-    reading++;
-    if(preview){
-      const msg = document.createElement("div");
-      msg.className="attach-reading"; msg.textContent="⏳ Lecture en cours…";
-      preview.appendChild(msg);
-    }
-    const reader = new FileReader();
-    reader.onload = e => {
-      window._pendingAttachments.push({ name: file.name, type: file.type, size: file.size, data: e.target.result });
-      reading--;
-      refreshAttachPreview();
-    };
+    if(file.size>MAX){ alert(`⚠️ "${file.name}" dépasse 3 Mo.`); return; }
+    const reader=new FileReader();
+    reader.onload=e=>{ window._pendingAttachments.push({name:file.name,type:file.type,size:file.size,data:e.target.result}); refreshAttachPreview(); };
     reader.readAsDataURL(file);
   });
-  input.value = "";
+  input.value="";
 }
 
-// ══════════════════════════════════════════════════════════════
-// REÇU INDIVIDUEL ACHETEUR (PDF Imprimable)
-// ══════════════════════════════════════════════════════════════
-function imprimerRecuAcheteur(id){
-  const a = acheteurs.find(x=>x.id===id);
-  if(!a){ alert("Acheteur introuvable."); return; }
-  const dosAchet = dossiers.filter(d=>d.acheteur_id===a.id);
-  const lotsAchet = dosAchet.map(d=>({ dos:d, lot:lots.find(l=>l.id===d.lot_id) })).filter(x=>x.lot);
-  const today = new Date();
-  const dateStr = today.toLocaleDateString("fr-FR",{year:"numeric",month:"long",day:"numeric"});
-  const numRecu = "R-"+a.id+"-"+today.getFullYear().toString().slice(-2)+String(today.getMonth()+1).padStart(2,"0");
-
-  const lignesLots = lotsAchet.length ? lotsAchet.map(({dos,lot})=>`
-    <tr>
-      <td>Lot ${esc(lot.numero_lot)}</td>
-      <td>Îlot ${esc(lot.ilot)}</td>
-      <td>${esc(lot.zone||"—")}</td>
-      <td>${lot.superficie} m²</td>
-      <td>${esc(lot.utilisation||"—")}</td>
-      <td style="font-weight:700;color:#8b6914">${dos.prix?Number(dos.prix).toLocaleString("fr-MA")+" MAD":"—"}</td>
-      <td>${esc(dos.date_attribution||"—")}</td>
-    </tr>`).join("") : `<tr><td colspan="7" style="text-align:center;color:#aaa;font-style:italic">Aucun lot attribué</td></tr>`;
-
-  const totalPrix = dosAchet.reduce((s,d)=>s+(Number(d.prix)||0),0);
-
-  const piecesHtml = a.pieces?.length
-    ? a.pieces.map(p=>`<span style="display:inline-block;padding:3px 10px;background:#e6f4ea;color:#2d7a3a;border-radius:12px;font-size:11px;font-weight:600;margin:2px">${esc(p)}</span>`).join(" ")
-    : '<span style="color:#aaa;font-size:12px;font-style:italic">Aucune pièce enregistrée</span>';
-
-  const attachHtml = a.attachments?.length
-    ? `<p style="margin-top:10px;font-size:12px;color:#555">📎 ${a.attachments.length} fichier(s) joint(s) : ${a.attachments.map(f=>esc(f.name)).join(", ")}</p>`
-    : "";
-
-  const html = `<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8"/>
-<title>Reçu — ${a.nom} ${a.prenom}</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Serif+4:wght@400;500;600&display=swap');
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'Source Serif 4',Georgia,serif;background:#fff;color:#1a1a2e;padding:36px 48px;font-size:13px;max-width:800px;margin:0 auto}
-  @media print{body{padding:20px 24px}.no-print{display:none!important}@page{margin:12mm;size:A4}}
-
-  /* En-tête */
-  .r-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px;padding-bottom:18px;border-bottom:3px double #1a1a2e}
-  .r-title{font-family:'Playfair Display',Georgia,serif;font-size:26px;color:#1a1a2e;letter-spacing:.5px}
-  .r-sub{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:1.2px;margin-top:4px}
-  .r-badge{background:#1a1a2e;color:#c4920a;padding:8px 18px;border-radius:10px;font-size:13px;font-weight:700;letter-spacing:.8px;text-align:right}
-  .r-badge small{display:block;font-size:10px;color:#94a3b8;margin-top:2px;letter-spacing:.5px;font-weight:400}
-
-  /* Infos acheteur */
-  .section-title{font-family:'Playfair Display',Georgia,serif;font-size:14px;color:#1a1a2e;margin:22px 0 10px;padding-bottom:6px;border-bottom:2px solid #f0e8d0;display:flex;align-items:center;gap:8px}
-  .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px}
-  .info-row{display:flex;flex-direction:column;gap:2px}
-  .info-lbl{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:.8px;font-weight:700}
-  .info-val{font-size:13px;color:#1a1a2e;font-weight:500}
-
-  /* Tableau lots */
-  table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
-  thead tr{background:#1a1a2e}
-  th{padding:9px 10px;color:#fff;font-size:10px;text-transform:uppercase;letter-spacing:.7px;font-weight:700;text-align:left}
-  td{padding:9px 10px;border-bottom:1px solid #f0f0f0;vertical-align:top}
-  tr:nth-child(even) td{background:#fafaf8}
-
-  /* Total */
-  .total-box{background:linear-gradient(135deg,#fdf6e3,#fef9ef);border:2px solid #e8d08a;border-radius:12px;padding:14px 20px;margin-top:16px;display:flex;justify-content:space-between;align-items:center}
-  .total-lbl{font-size:12px;color:#8b6914;font-weight:700;text-transform:uppercase;letter-spacing:.8px}
-  .total-val{font-size:22px;font-weight:700;font-family:'Playfair Display',Georgia,serif;color:#8b6914}
-
-  /* Signature */
-  .sig-row{display:flex;justify-content:space-between;margin-top:36px;gap:24px}
-  .sig-box{flex:1;border-top:1.5px solid #ccc;padding-top:8px;font-size:11px;color:#888;text-align:center}
-
-  /* Pied */
-  .footer{margin-top:28px;padding-top:12px;border-top:1px solid #e5e7eb;font-size:10px;color:#aaa;display:flex;justify-content:space-between}
-
-  /* Bouton imprimer */
-  .print-btn{display:block;margin:0 auto 28px;padding:12px 32px;background:linear-gradient(135deg,#c4920a,#8b6914);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:.3px;box-shadow:0 4px 12px rgba(196,146,10,.3)}
-
-  /* Watermark REÇU */
-  .watermark{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-35deg);font-family:'Playfair Display',Georgia,serif;font-size:100px;color:rgba(196,146,10,.06);font-weight:700;pointer-events:none;z-index:0;white-space:nowrap;display:none}
-  @media print{.watermark{display:block}}
-</style>
-</head>
-<body>
-<div class="watermark">REÇU OFFICIEL</div>
-
-<button class="print-btn no-print" onclick="window.print()">🖨️ Imprimer / Sauvegarder en PDF</button>
-
-<div class="r-header">
-  <div>
-    <div class="r-title">🏘 Reçu d'Acheteur</div>
-    <div class="r-sub">Guide de Lotissements — Registre foncier</div>
-  </div>
-  <div class="r-badge">
-    N° ${numRecu}
-    <small>Émis le ${dateStr}</small>
-  </div>
-</div>
-
-<div class="section-title">👤 Informations de l'acheteur</div>
-<div class="info-grid">
-  <div class="info-row"><span class="info-lbl">Nom complet</span><span class="info-val" style="font-weight:700;font-size:15px">${esc(a.nom)} ${esc(a.prenom)}</span></div>
-  <div class="info-row"><span class="info-lbl">N° CIN</span><span class="info-val">${esc(a.cin||"—")}</span></div>
-  <div class="info-row"><span class="info-lbl">Date de naissance</span><span class="info-val">${esc(a.date_naissance||"—")}</span></div>
-  <div class="info-row"><span class="info-lbl">Téléphone</span><span class="info-val">${esc(a.telephone||"—")}</span></div>
-  <div class="info-row"><span class="info-lbl">Email</span><span class="info-val">${esc(a.email||"—")}</span></div>
-  <div class="info-row"><span class="info-lbl">Adresse</span><span class="info-val">${esc(a.adresse||"—")}</span></div>
-</div>
-
-<div class="section-title">📄 Pièces justificatives fournies</div>
-<div>${piecesHtml}</div>
-${attachHtml}
-
-<div class="section-title">🏗 Lot(s) attribué(s)</div>
-<table>
-  <thead><tr><th>N° Lot</th><th>Îlot</th><th>Zone</th><th>Superficie</th><th>Utilisation</th><th>Prix (MAD)</th><th>Date</th></tr></thead>
-  <tbody>${lignesLots}</tbody>
-</table>
-
-${totalPrix ? `<div class="total-box">
-  <span class="total-lbl">💰 Montant total réglé</span>
-  <span class="total-val">${totalPrix.toLocaleString("fr-MA")} MAD</span>
-</div>` : ""}
-
-<div class="sig-row">
-  <div class="sig-box">Signature de l'acheteur<br><br><br></div>
-  <div class="sig-box">Cachet et signature<br>de l'administration<br><br></div>
-</div>
-
-<div class="footer">
-  <span>Guide de Lotissements — Document officiel — Reçu n° ${numRecu}</span>
-  <span>${dateStr}</span>
-</div>
-</body></html>`;
-
-  const win = window.open("","_blank");
-  win.document.write(html);
-  win.document.close();
-}
-
-// ── Sauvegardes ───────────────────────────────────────────────
+// ── Save/Load ──
 function saveAcheteur(){
-  const pieces = [...document.querySelectorAll(".piece-check.checked")].map(e=>e.dataset.p);
-  const obj = {
-    nom:            document.getElementById("f-nom").value.trim(),
-    prenom:         document.getElementById("f-prenom").value.trim(),
-    cin:            document.getElementById("f-cin").value.trim(),
-    date_naissance: document.getElementById("f-dob").value,
-    telephone:      document.getElementById("f-tel").value.trim(),
-    email:          document.getElementById("f-email").value.trim(),
-    adresse:        document.getElementById("f-adr").value.trim(),
-    pieces,
-    attachments:    window._pendingAttachments || []
-  };
-  if(!obj.nom||!obj.prenom||!obj.cin){ alert("Veuillez remplir les champs obligatoires (*)"); return; }
-  if(editMode){ Object.assign(acheteurs.find(x=>x.id===editMode.id), obj); }
-  else { acheteurs.push({ id:genId("A"), ...obj }); }
-  window._pendingAttachments = [];
-  closeModal(); renderAll();
+  const nom=document.getElementById("f-nom").value.trim();
+  const prenom=document.getElementById("f-prenom").value.trim();
+  const cin=document.getElementById("f-cin").value.trim();
+  if(!nom||!prenom||!cin){ alert("Champs obligatoires (*)"); return; }
+  const pieces=[...document.querySelectorAll(".piece-check.checked")].map(e=>e.dataset.p);
+  const obj={nom,prenom,cin,date_naissance:document.getElementById("f-dob").value,telephone:document.getElementById("f-tel").value.trim(),email:document.getElementById("f-email").value.trim(),adresse:document.getElementById("f-adr").value.trim(),pieces,attachments:window._pendingAttachments||[]};
+  if(editMode){ Object.assign(acheteurs.find(x=>x.id===editMode.id),obj); }
+  else { acheteurs.push({id:genId("A"),...obj}); }
+  window._pendingAttachments=[];
+  closeModal(); renderAll(); sauvegarder();
 }
+
 function saveLot(){
-  const obj = {
-    numero_lot:  document.getElementById("f-lot").value.trim(),
-    ilot:        document.getElementById("f-ilot").value.trim(),
-    superficie:  Number(document.getElementById("f-sup").value),
-    zone:        document.getElementById("f-zone").value.trim(),
-    utilisation: document.getElementById("f-util").value,
-    statut:      document.getElementById("f-stat").value||"Disponible",
-    prix:        Number(document.getElementById("f-prix-lot").value)||0,
-  };
-  if(!obj.numero_lot||!obj.ilot||!obj.superficie){ alert("Veuillez remplir les champs obligatoires (*)"); return; }
-  if(editMode){ Object.assign(lots.find(x=>x.id===editMode.id), obj); }
-  else { lots.push({ id:genId("L"), ...obj }); }
-  closeModal(); renderAll();
+  const obj={numero_lot:document.getElementById("f-lot").value.trim(),ilot:document.getElementById("f-ilot").value.trim(),superficie:Number(document.getElementById("f-sup").value),zone:document.getElementById("f-zone").value.trim(),utilisation:document.getElementById("f-util").value,statut:document.getElementById("f-stat").value||"Disponible",prix:Number(document.getElementById("f-prix-lot").value)||0};
+  if(!obj.numero_lot||!obj.ilot||!obj.superficie){ alert("Champs obligatoires (*)"); return; }
+  if(editMode){ Object.assign(lots.find(x=>x.id===editMode.id),obj); }
+  else { lots.push({id:genId("L"),...obj}); }
+  closeModal(); renderAll(); sauvegarder();
 }
+
 function saveDossier(){
-  const obj = {
-    acheteur_id:      document.getElementById("f-achet").value,
-    lot_id:           document.getElementById("f-lotid").value,
-    date_attribution: document.getElementById("f-date").value,
-    prix:             Number(document.getElementById("f-prix").value)||"",
-    notes:            document.getElementById("f-notes").value.trim(),
-  };
-  if(!obj.acheteur_id||!obj.lot_id){ alert("Veuillez sélectionner un acheteur et un lot"); return; }
-  // Marquer le lot comme vendu
-  const lot = lots.find(x=>x.id===obj.lot_id);
+  const obj={acheteur_id:document.getElementById("f-achet").value,lot_id:document.getElementById("f-lotid").value,date_attribution:document.getElementById("f-date").value,prix:Number(document.getElementById("f-prix").value)||"",notes:document.getElementById("f-notes").value.trim()};
+  if(!obj.acheteur_id||!obj.lot_id){ alert("Sélectionnez un acheteur et un lot"); return; }
+  const lot=lots.find(x=>x.id===obj.lot_id);
   if(lot) lot.statut="Vendu";
-  if(editMode){ Object.assign(dossiers.find(x=>x.id===editMode.id), obj); }
-  else { dossiers.push({ id:genId("D"), ...obj }); }
-  closeModal(); renderAll();
+  if(editMode){ Object.assign(dossiers.find(x=>x.id===editMode.id),obj); }
+  else { dossiers.push({id:genId("D"),...obj}); }
+  closeModal(); renderAll(); sauvegarder();
 }
 
-// ══════════════════════════════════════════════════════════════
-// EXPORT / ARCHIVAGE
-// ══════════════════════════════════════════════════════════════
-
-// ── Export CSV individuel ──────────────────────────────────────
+// ── Export ──
 function exportCSV(type){
-  let rows = [], filename = "";
-  const today = new Date().toISOString().slice(0,10);
-
+  let rows=[],filename="";
+  const today=new Date().toISOString().slice(0,10);
   if(type==="dossiers"){
-    filename = `Dossiers_Lotissement_${today}.csv`;
-    rows.push(["N° Dossier","Acheteur Nom","Acheteur Prénom","CIN","Lot","Îlot","Zone","Superficie (m²)","Utilisation","Statut","Prix (MAD)","Date Attribution","Notes"]);
-    dossiers.forEach(d=>{
-      const a = acheteurs.find(x=>x.id===d.acheteur_id)||{};
-      const l = lots.find(x=>x.id===d.lot_id)||{};
-      rows.push([d.id, a.nom||"", a.prenom||"", a.cin||"", l.numero_lot||"", l.ilot||"", l.zone||"", l.superficie||"", l.utilisation||"", l.statut||"", d.prix||"", d.date_attribution||"", d.notes||""]);
-    });
+    filename=`Dossiers_${today}.csv`;
+    rows.push(["N° Dossier","Nom","Prénom","CIN","Lot","Îlot","Zone","Superficie","Utilisation","Statut","Prix","Date","Notes"]);
+    dossiers.forEach(d=>{ const a=acheteurs.find(x=>x.id===d.acheteur_id)||{}; const l=lots.find(x=>x.id===d.lot_id)||{}; rows.push([d.id,a.nom||"",a.prenom||"",a.cin||"",l.numero_lot||"",l.ilot||"",l.zone||"",l.superficie||"",l.utilisation||"",l.statut||"",d.prix||"",d.date_attribution||"",d.notes||""]); });
   } else if(type==="acheteurs"){
-    filename = `Acheteurs_Lotissement_${today}.csv`;
-    rows.push(["ID","Nom","Prénom","CIN","Date de naissance","Téléphone","Email","Adresse","Pièces justificatives"]);
-    acheteurs.forEach(a=>{
-      rows.push([a.id, a.nom||"", a.prenom||"", a.cin||"", a.date_naissance||"", a.telephone||"", a.email||"", a.adresse||"", (a.pieces||[]).join(" | ")]);
-    });
+    filename=`Acheteurs_${today}.csv`;
+    rows.push(["ID","Nom","Prénom","CIN","Date naissance","Téléphone","Email","Adresse","Pièces"]);
+    acheteurs.forEach(a=>{ rows.push([a.id,a.nom||"",a.prenom||"",a.cin||"",a.date_naissance||"",a.telephone||"",a.email||"",a.adresse||"",(a.pieces||[]).join(" | ")]); });
   } else if(type==="lots"){
-    filename = `Lots_Lotissement_${today}.csv`;
-    rows.push(["ID","N° Lot","Îlot","Zone","Superficie (m²)","Utilisation","Statut","Acheteur lié"]);
-    lots.forEach(l=>{
-      const dos = dossiers.find(d=>d.lot_id===l.id);
-      const a   = dos ? acheteurs.find(x=>x.id===dos.acheteur_id) : null;
-      rows.push([l.id, l.numero_lot||"", l.ilot||"", l.zone||"", l.superficie||"", l.utilisation||"", l.statut||"", a?(a.nom+" "+a.prenom):""]);
-    });
+    filename=`Lots_${today}.csv`;
+    rows.push(["ID","N° Lot","Îlot","Zone","Superficie","Utilisation","Statut","Acheteur"]);
+    lots.forEach(l=>{ const dos=dossiers.find(d=>d.lot_id===l.id); const a=dos?acheteurs.find(x=>x.id===dos.acheteur_id):null; rows.push([l.id,l.numero_lot||"",l.ilot||"",l.zone||"",l.superficie||"",l.utilisation||"",l.statut||"",a?(a.nom+" "+a.prenom):""]); });
   }
-
-  const BOM = "\uFEFF"; // UTF-8 BOM pour Excel
-  const csv = BOM + rows.map(r => r.map(cell => `"${String(cell).replace(/"/g,'""')}"`).join(";")).join("\r\n");
-  downloadFile(csv, filename, "text/csv;charset=utf-8;");
+  const BOM="\uFEFF";
+  const csv=BOM+rows.map(r=>r.map(cell=>`"${String(cell).replace(/"/g,'""')}"`).join(";")).join("\r\n");
+  downloadFile(csv,filename,"text/csv;charset=utf-8;");
 }
 
-// ── Export tout en XLSX (multi-feuilles) ──────────────────────
 function exportAll(){
-  // Construction manuelle d'un fichier XLSX minimal via SheetJS (CDN)
-  // Chargement dynamique si pas encore présent
-  if(typeof XLSX === "undefined"){
-    const script = document.createElement("script");
-    script.src = "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js";
-    script.onload = () => buildXLSX();
-    script.onerror = () => {
-      alert("Impossible de charger SheetJS (pas de connexion internet).\nExportez chaque tableau séparément en .csv — ils s'ouvrent dans Excel.");
-    };
+  if(typeof XLSX==="undefined"){
+    const script=document.createElement("script");
+    script.src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js";
+    script.onload=()=>buildXLSX();
+    script.onerror=()=>alert("Impossible de charger SheetJS. Exportez en CSV.");
     document.head.appendChild(script);
-  } else {
-    buildXLSX();
-  }
+  } else buildXLSX();
 }
 
 function buildXLSX(){
-  const today = new Date().toISOString().slice(0,10);
-  const wb = XLSX.utils.book_new();
-
-  // Feuille 1 : Dossiers
-  const dos_data = [["N° Dossier","Nom","Prénom","CIN","Lot","Îlot","Zone","Superficie (m²)","Utilisation","Statut","Prix (MAD)","Date Attribution","Notes"]];
-  dossiers.forEach(d=>{
-    const a = acheteurs.find(x=>x.id===d.acheteur_id)||{};
-    const l = lots.find(x=>x.id===d.lot_id)||{};
-    dos_data.push([d.id, a.nom||"", a.prenom||"", a.cin||"", l.numero_lot||"", l.ilot||"", l.zone||"", l.superficie||"", l.utilisation||"", l.statut||"", d.prix||"", d.date_attribution||"", d.notes||""]);
-  });
-  const ws1 = XLSX.utils.aoa_to_sheet(dos_data);
-  ws1["!cols"] = [8,14,14,12,8,8,12,12,14,12,12,14,20].map(w=>({wch:w}));
-  XLSX.utils.book_append_sheet(wb, ws1, "Dossiers");
-
-  // Feuille 2 : Acheteurs
-  const achet_data = [["ID","Nom","Prénom","CIN","Date de naissance","Téléphone","Email","Adresse","Pièces justificatives"]];
-  acheteurs.forEach(a=>{
-    achet_data.push([a.id, a.nom||"", a.prenom||"", a.cin||"", a.date_naissance||"", a.telephone||"", a.email||"", a.adresse||"", (a.pieces||[]).join(", ")]);
-  });
-  const ws2 = XLSX.utils.aoa_to_sheet(achet_data);
-  ws2["!cols"] = [8,14,14,12,14,13,22,28,36].map(w=>({wch:w}));
-  XLSX.utils.book_append_sheet(wb, ws2, "Acheteurs");
-
-  // Feuille 3 : Lots
-  const lots_data = [["ID","N° Lot","Îlot","Zone","Superficie (m²)","Utilisation","Statut","Acheteur lié"]];
-  lots.forEach(l=>{
-    const dos = dossiers.find(d=>d.lot_id===l.id);
-    const a   = dos ? acheteurs.find(x=>x.id===dos.acheteur_id) : null;
-    lots_data.push([l.id, l.numero_lot||"", l.ilot||"", l.zone||"", l.superficie||"", l.utilisation||"", l.statut||"", a?(a.nom+" "+a.prenom):""]);
-  });
-  const ws3 = XLSX.utils.aoa_to_sheet(lots_data);
-  ws3["!cols"] = [8,8,8,12,12,14,12,20].map(w=>({wch:w}));
-  XLSX.utils.book_append_sheet(wb, ws3, "Lots");
-
-  XLSX.writeFile(wb, `Guide_Lotissement_${today}.xlsx`);
+  const today=new Date().toISOString().slice(0,10);
+  const wb=XLSX.utils.book_new();
+  const dos_data=[["N° Dossier","Nom","Prénom","CIN","Lot","Îlot","Zone","Superficie","Utilisation","Statut","Prix","Date","Notes"]];
+  dossiers.forEach(d=>{ const a=acheteurs.find(x=>x.id===d.acheteur_id)||{}; const l=lots.find(x=>x.id===d.lot_id)||{}; dos_data.push([d.id,a.nom||"",a.prenom||"",a.cin||"",l.numero_lot||"",l.ilot||"",l.zone||"",l.superficie||"",l.utilisation||"",l.statut||"",d.prix||"",d.date_attribution||"",d.notes||""]); });
+  XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(dos_data),"Dossiers");
+  const achet_data=[["ID","Nom","Prénom","CIN","Date naissance","Téléphone","Email","Adresse","Pièces"]];
+  acheteurs.forEach(a=>{ achet_data.push([a.id,a.nom||"",a.prenom||"",a.cin||"",a.date_naissance||"",a.telephone||"",a.email||"",a.adresse||"",(a.pieces||[]).join(", ")]); });
+  XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(achet_data),"Acheteurs");
+  const lots_data=[["ID","N° Lot","Îlot","Zone","Superficie","Utilisation","Statut","Acheteur"]];
+  lots.forEach(l=>{ const dos=dossiers.find(d=>d.lot_id===l.id); const a=dos?acheteurs.find(x=>x.id===dos.acheteur_id):null; lots_data.push([l.id,l.numero_lot||"",l.ilot||"",l.zone||"",l.superficie||"",l.utilisation||"",l.statut||"",a?(a.nom+" "+a.prenom):""]); });
+  XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(lots_data),"Lots");
+  XLSX.writeFile(wb,`Guide_Lotissement_${today}.xlsx`);
 }
 
-// ── Rapport hebdomadaire (tout en un, imprimable) ─────────────
 function genererRapport(){
-  const today = new Date();
-  const dateStr = today.toLocaleDateString("fr-FR", { weekday:"long", year:"numeric", month:"long", day:"numeric" });
-  const semaine = getNumeroSemaine(today);
-
-  // Construire les lignes du rapport
-  const lignesAcheteurs = acheteurs.map(a => {
-    const dosAchet = dossiers.filter(d => d.acheteur_id === a.id);
-    const lotsAchet = dosAchet.map(d => lots.find(l => l.id === d.lot_id)).filter(Boolean);
-
-    const lotsInfo = lotsAchet.length
-      ? lotsAchet.map(l => `Lot ${l.numero_lot} – Îlot ${l.ilot} – ${l.superficie}m² – ${l.utilisation} – <b>${l.statut}</b>`).join("<br>")
-      : "<em style='color:#aaa'>Aucun lot attribué</em>";
-
-    const prixTotal = dosAchet.reduce((s,d) => s + (Number(d.prix)||0), 0);
-    const statutDos = dosAchet.length ? dosAchet.map(d => d.date_attribution ? `Attribué le ${d.date_attribution}` : "Date N/R").join(", ") : "—";
-
-    return `
-      <tr>
-        <td style="font-weight:700;color:#1a1a2e;font-size:14px">${a.nom} ${a.prenom}</td>
-        <td>${a.cin||"—"}</td>
-        <td>${a.telephone||"—"}<br><span style="font-size:11px;color:#888">${a.email||""}</span></td>
-        <td>${a.adresse||"—"}</td>
-        <td>${lotsInfo}</td>
-        <td style="text-align:center">${a.pieces?.length ? a.pieces.map(p=>`<span style="display:inline-block;padding:2px 7px;background:#e6f4ea;color:#2d7a3a;border-radius:10px;font-size:10px;font-weight:600;margin:1px">${p}</span>`).join(" ") : '<span style="color:#aaa;font-size:11px">Aucune</span>'}</td>
-        <td style="text-align:center;font-weight:700;color:#8b6914">${prixTotal ? prixTotal.toLocaleString("fr-MA")+" MAD" : "—"}</td>
-        <td style="text-align:center;font-size:12px;color:#555">${statutDos}</td>
-      </tr>`;
+  const today=new Date();
+  const dateStr=today.toLocaleDateString("fr-FR",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
+  const semaine=getNumeroSemaine(today);
+  const totalVendus=lots.filter(l=>l.statut==="Vendu").length;
+  const totalDispo=lots.filter(l=>l.statut==="Disponible").length;
+  const totalReserve=lots.filter(l=>l.statut==="Réservé").length;
+  const totalPrix=dossiers.reduce((s,d)=>s+(Number(d.prix)||0),0);
+  const pctVendu=lots.length?Math.round(totalVendus/lots.length*100):0;
+  const lignesAcheteurs=acheteurs.map(a=>{
+    const dosAchet=dossiers.filter(d=>d.acheteur_id===a.id);
+    const lotsAchet=dosAchet.map(d=>lots.find(l=>l.id===d.lot_id)).filter(Boolean);
+    const lotsInfo=lotsAchet.length?lotsAchet.map(l=>`Lot ${l.numero_lot} – Îlot ${l.ilot} – ${l.superficie}m²`).join("<br>"):"<em style='color:#aaa'>Aucun lot</em>";
+    const prixTotal=dosAchet.reduce((s,d)=>s+(Number(d.prix)||0),0);
+    return `<tr><td style="font-weight:700">${a.nom} ${a.prenom}</td><td>${a.cin||"—"}</td><td>${a.telephone||"—"}</td><td>${a.adresse||"—"}</td><td>${lotsInfo}</td><td style="font-weight:700;color:#8b6914">${prixTotal?prixTotal.toLocaleString("fr-MA")+" MAD":"—"}</td></tr>`;
   }).join("");
-
-  // Statistiques globales
-  const totalVendus    = lots.filter(l=>l.statut==="Vendu").length;
-  const totalDispo     = lots.filter(l=>l.statut==="Disponible").length;
-  const totalReserve   = lots.filter(l=>l.statut==="Réservé").length;
-  const totalPrix      = dossiers.reduce((s,d)=>s+(Number(d.prix)||0),0);
-  const pctVendu       = lots.length ? Math.round(totalVendus/lots.length*100) : 0;
-
-  const html = `<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8"/>
-<title>Rapport Hebdomadaire – Semaine ${semaine}</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Serif+4:wght@400;500;600&display=swap');
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'Source Serif 4',Georgia,serif;background:#fff;color:#1a1a2e;padding:30px 40px;font-size:13px}
-  @media print{body{padding:15px 20px} .no-print{display:none!important} @page{margin:15mm}}
-
-  /* En-tête */
-  .header{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid #1a1a2e;padding-bottom:18px;margin-bottom:24px}
-  .header-left h1{font-family:'Playfair Display',Georgia,serif;font-size:24px;color:#1a1a2e;letter-spacing:.5px}
-  .header-left p{font-size:12px;color:#666;margin-top:4px;text-transform:uppercase;letter-spacing:1px}
-  .header-right{text-align:right}
-  .semaine-badge{background:#1a1a2e;color:#fff;padding:6px 16px;border-radius:8px;font-size:13px;font-weight:700;letter-spacing:.5px}
-  .date-str{font-size:11px;color:#888;margin-top:5px}
-
-  /* Stats résumé */
-  .stats-row{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap}
-  .stat{flex:1;min-width:120px;padding:12px 16px;border-radius:10px;border:1px solid #e5e7eb}
-  .stat .n{font-size:22px;font-weight:700;font-family:'Playfair Display',Georgia,serif}
-  .stat .l{font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:#888;margin-top:2px}
-  .s1{background:#e6f4ea;border-color:#b7dfbe}.s1 .n{color:#2d7a3a}
-  .s2{background:#fce8e6;border-color:#f5c0ba}.s2 .n{color:#c0392b}
-  .s3{background:#fff8e1;border-color:#e8d08a}.s3 .n{color:#8a6100}
-  .s4{background:#e8f0fe;border-color:#b3c8f5}.s4 .n{color:#1a3e8a}
-  .s5{background:#fdf6e3;border-color:#e8d08a}.s5 .n{color:#8b6914}
-
-  /* Barre de progression */
-  .progress-wrap{margin-bottom:24px}
-  .progress-label{display:flex;justify-content:space-between;font-size:11px;color:#888;margin-bottom:5px}
-  .progress-bar{height:8px;background:#f0f0f0;border-radius:4px;overflow:hidden}
-  .progress-fill{height:100%;background:linear-gradient(90deg,#34a853,#4caf50);border-radius:4px;transition:width .3s}
-
-  /* Tableau */
-  h2.section{font-family:'Playfair Display',Georgia,serif;font-size:15px;color:#1a1a2e;margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid #f0e8d0;display:flex;align-items:center;gap:8px}
-  table{width:100%;border-collapse:collapse;font-size:12px}
-  thead tr{background:#1a1a2e}
-  th{padding:9px 10px;text-align:left;color:#fff;font-size:10px;text-transform:uppercase;letter-spacing:.8px;font-weight:700}
-  td{padding:10px 10px;vertical-align:top;border-bottom:1px solid #f0f0f0;line-height:1.4}
-  tr:nth-child(even) td{background:#fafaf8}
-  .empty{padding:30px;text-align:center;color:#aaa;font-style:italic;font-size:13px}
-
-  /* Pied de page */
-  .footer{margin-top:30px;padding-top:14px;border-top:2px solid #f0f0f0;display:flex;justify-content:space-between;font-size:10px;color:#aaa}
-
-  /* Bouton imprimer */
-  .print-btn{display:block;margin:0 auto 28px;padding:12px 32px;background:linear-gradient(135deg,#1a1a2e,#2d3a6e);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:.3px;box-shadow:0 4px 12px rgba(26,26,46,.3)}
-</style>
-</head>
-<body>
-
-<button class="print-btn no-print" onclick="window.print()">🖨️ Imprimer / Sauvegarder en PDF</button>
-
-<div class="header">
-  <div class="header-left">
-    <h1>🏘 Guide de Lotissements</h1>
-    <p>Rapport hebdomadaire des acheteurs et attributions</p>
-  </div>
-  <div class="header-right">
-    <div class="semaine-badge">Semaine ${semaine} — ${today.getFullYear()}</div>
-    <div class="date-str">Généré le ${dateStr}</div>
-  </div>
-</div>
-
-<div class="stats-row">
-  <div class="stat s1"><div class="n">${acheteurs.length}</div><div class="l">Acheteurs total</div></div>
-  <div class="stat s2"><div class="n">${totalVendus}</div><div class="l">Lots vendus</div></div>
-  <div class="stat s3"><div class="n">${totalReserve}</div><div class="l">Lots réservés</div></div>
-  <div class="stat s4"><div class="n">${totalDispo}</div><div class="l">Lots disponibles</div></div>
-  <div class="stat s5"><div class="n">${totalPrix?totalPrix.toLocaleString("fr-MA")+" MAD":"—"}</div><div class="l">Valeur totale attribuée</div></div>
-</div>
-
-<div class="progress-wrap">
-  <div class="progress-label"><span>Taux de commercialisation</span><span>${pctVendu}% vendu (${totalVendus}/${lots.length} lots)</span></div>
-  <div class="progress-bar"><div class="progress-fill" style="width:${pctVendu}%"></div></div>
-</div>
-
-<h2 class="section">👤 Liste complète des acheteurs (${acheteurs.length})</h2>
-${acheteurs.length === 0
-  ? `<div class="empty">Aucun acheteur enregistré.</div>`
-  : `<table>
-  <thead><tr>
-    <th>Nom complet</th><th>CIN</th><th>Contact</th><th>Adresse</th>
-    <th>Lot(s) attribué(s)</th><th>Pièces fournies</th><th>Prix</th><th>Statut dossier</th>
-  </tr></thead>
-  <tbody>${lignesAcheteurs}</tbody>
-</table>`}
-
-<div class="footer">
-  <span>Guide de Lotissements — Rapport confidentiel</span>
-  <span>Semaine ${semaine} / ${today.getFullYear()} — ${dossiers.length} dossier(s) — ${lots.length} lot(s)</span>
-</div>
-
-</body></html>`;
-
-  const win = window.open("", "_blank");
-  win.document.write(html);
-  win.document.close();
+  const html=`<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"/><title>Rapport Semaine ${semaine}</title><style>body{font-family:Georgia,serif;padding:30px;font-size:13px}table{width:100%;border-collapse:collapse}th{background:#1a1a2e;color:#fff;padding:9px;font-size:11px;text-align:left}td{padding:9px;border-bottom:1px solid #f0f0f0}.btn{display:block;margin:0 auto 20px;padding:10px 28px;background:#1a1a2e;color:#fff;border:none;border-radius:8px;font-size:13px;cursor:pointer}</style></head><body><button class="btn" onclick="window.print()">🖨️ Imprimer</button><h1 style="font-size:22px;margin-bottom:6px">🏘 Guide de Lotissements — Rapport Semaine ${semaine}</h1><p style="color:#888;margin-bottom:20px">Généré le ${dateStr}</p><div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap"><div style="padding:10px 16px;background:#e6f4ea;border-radius:8px"><b style="color:#2d7a3a;font-size:20px">${acheteurs.length}</b><div style="font-size:11px;color:#888">Acheteurs</div></div><div style="padding:10px 16px;background:#fce8e6;border-radius:8px"><b style="color:#c0392b;font-size:20px">${totalVendus}</b><div style="font-size:11px;color:#888">Vendus</div></div><div style="padding:10px 16px;background:#fff8e1;border-radius:8px"><b style="color:#8a6100;font-size:20px">${totalReserve}</b><div style="font-size:11px;color:#888">Réservés</div></div><div style="padding:10px 16px;background:#e8f0fe;border-radius:8px"><b style="color:#1a3e8a;font-size:20px">${totalDispo}</b><div style="font-size:11px;color:#888">Disponibles</div></div><div style="padding:10px 16px;background:#fdf6e3;border-radius:8px"><b style="color:#8b6914;font-size:18px">${totalPrix?totalPrix.toLocaleString("fr-MA")+" MAD":"—"}</b><div style="font-size:11px;color:#888">Valeur totale</div></div></div><table><thead><tr><th>Nom</th><th>CIN</th><th>Téléphone</th><th>Adresse</th><th>Lots</th><th>Prix</th></tr></thead><tbody>${lignesAcheteurs}</tbody></table></body></html>`;
+  const win=window.open("","_blank"); win.document.write(html); win.document.close();
 }
 
-function getNumeroSemaine(d){
-  const date = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
-  date.setUTCDate(date.getUTCDate() + 4 - (date.getUTCDay()||7));
-  const yearStart = new Date(Date.UTC(date.getUTCFullYear(),0,1));
-  return Math.ceil((((date - yearStart) / 86400000) + 1)/7);
+function getNumeroSemaine(d){ const date=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())); date.setUTCDate(date.getUTCDate()+4-(date.getUTCDay()||7)); const yearStart=new Date(Date.UTC(date.getUTCFullYear(),0,1)); return Math.ceil((((date-yearStart)/86400000)+1)/7); }
+function downloadFile(content,filename,mime){ const blob=new Blob([content],{type:mime}); const url=URL.createObjectURL(blob); const a=document.createElement("a"); a.href=url; a.download=filename; a.click(); setTimeout(()=>URL.revokeObjectURL(url),1000); }
+
+// ── Reçu ──
+function imprimerRecuAcheteur(id){
+  const a=acheteurs.find(x=>x.id===id); if(!a) return;
+  const dosAchet=dossiers.filter(d=>d.acheteur_id===a.id);
+  const lotsAchet=dosAchet.map(d=>({dos:d,lot:lots.find(l=>l.id===d.lot_id)})).filter(x=>x.lot);
+  const today=new Date(); const dateStr=today.toLocaleDateString("fr-FR",{year:"numeric",month:"long",day:"numeric"});
+  const numRecu="R-"+a.id+"-"+today.getFullYear().toString().slice(-2)+String(today.getMonth()+1).padStart(2,"0");
+  const lignesLots=lotsAchet.length?lotsAchet.map(({dos,lot})=>`<tr><td>Lot ${lot.numero_lot}</td><td>Îlot ${lot.ilot}</td><td>${lot.zone||"—"}</td><td>${lot.superficie} m²</td><td>${lot.utilisation||"—"}</td><td style="font-weight:700;color:#8b6914">${dos.prix?Number(dos.prix).toLocaleString("fr-MA")+" MAD":"—"}</td><td>${dos.date_attribution||"—"}</td></tr>`).join(""):
+    `<tr><td colspan="7" style="text-align:center;color:#aaa;font-style:italic">Aucun lot attribué</td></tr>`;
+  const totalPrix=dosAchet.reduce((s,d)=>s+(Number(d.prix)||0),0);
+  const html=`<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"/><title>Reçu — ${a.nom} ${a.prenom}</title><style>body{font-family:Georgia,serif;padding:36px 48px;font-size:13px;max-width:800px;margin:0 auto}@media print{body{padding:20px}.no-print{display:none!important}}table{width:100%;border-collapse:collapse;font-size:12px}thead tr{background:#1a1a2e}th{padding:9px;color:#fff;font-size:10px;text-align:left}td{padding:9px;border-bottom:1px solid #f0f0f0}.btn{display:block;margin:0 auto 20px;padding:10px 28px;background:#c4920a;color:#fff;border:none;border-radius:8px;font-size:13px;cursor:pointer}</style></head><body><button class="no-print btn" onclick="window.print()">🖨️ Imprimer</button><h1 style="font-size:24px;margin-bottom:4px">🏘 Reçu d'Acheteur</h1><p style="color:#888;margin-bottom:20px">N° ${numRecu} — ${dateStr}</p><h3>👤 ${a.nom} ${a.prenom} — CIN : ${a.cin||"—"}</h3><p>📞 ${a.telephone||"—"} · ✉️ ${a.email||"—"} · 📍 ${a.adresse||"—"}</p><br/><table><thead><tr><th>N° Lot</th><th>Îlot</th><th>Zone</th><th>Superficie</th><th>Utilisation</th><th>Prix (MAD)</th><th>Date</th></tr></thead><tbody>${lignesLots}</tbody></table>${totalPrix?`<div style="margin-top:16px;padding:12px 18px;background:#fdf6e3;border-radius:10px;display:flex;justify-content:space-between;align-items:center"><span style="font-size:12px;color:#8b6914;font-weight:700">💰 MONTANT TOTAL</span><span style="font-size:20px;font-weight:700;color:#8b6914">${totalPrix.toLocaleString("fr-MA")} MAD</span></div>`:""}</body></html>`;
+  const win=window.open("","_blank"); win.document.write(html); win.document.close();
 }
 
-function downloadFile(content, filename, mime){
-  const blob = new Blob([content], { type: mime });
-  const url  = URL.createObjectURL(blob);
-  const a    = document.createElement("a");
-  a.href = url; a.download = filename; a.click();
-  setTimeout(()=>URL.revokeObjectURL(url), 1000);
-}
-
-// ══════════════════════════════════════════════════════════════
-// SAUVEGARDE AUTOMATIQUE (localStorage)
-// ══════════════════════════════════════════════════════════════
-const CLE = "lotissement_v1";
-
+// ── Sauvegarde localStorage ──
+const CLE="lotissement_v1";
+function saveData(){ localStorage.setItem(CLE,JSON.stringify({acheteurs,lots,dossiers,savedAt:new Date().toISOString()})); }
 function sauvegarder(){
-  localStorage.setItem(CLE, JSON.stringify({ acheteurs, lots, dossiers, savedAt: new Date().toISOString() }));
-  const el = document.getElementById("save-indicator");
+  saveData();
+  const el=document.getElementById("save-status");
   if(!el) return;
-  const now = new Date().toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});
-  el.innerHTML = "✅ Sauvegardé automatiquement à " + now;
-  el.style.color = "#2d7a3a";
+  const now=new Date().toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});
+  el.innerHTML="✅ Sauvegardé à "+now; el.style.color="#2d7a3a";
   clearTimeout(window._saveTimer);
-  window._saveTimer = setTimeout(()=>{
-    el.innerHTML = "💾 Données sauvegardées — fermeture sans risque";
-    el.style.color = "#888";
-  }, 3000);
+  window._saveTimer=setTimeout(()=>{ el.innerHTML="💾 Données sauvegardées"; el.style.color="#888"; },3000);
 }
 
 function chargerDonnees(){
-  try {
-    const raw = localStorage.getItem(CLE);
-    if(!raw) return null;
-    const data = JSON.parse(raw);
-    if(data.acheteurs) acheteurs = data.acheteurs;
-    if(data.lots)      lots      = data.lots;
-    if(data.dossiers)  dossiers  = data.dossiers;
-    return data.savedAt || null;
-  } catch(e){ return null; }
+  try{ const raw=localStorage.getItem(CLE); if(!raw) return null; const data=JSON.parse(raw); if(data.acheteurs) acheteurs=data.acheteurs; if(data.lots) lots=data.lots; if(data.dossiers) dossiers=data.dossiers; return data.savedAt||null; }
+  catch(e){ return null; }
 }
 
 function reinitialiserDonnees(){
-  if(!confirm("⚠️ Effacer TOUTES les données sauvegardées et repartir de zéro ?\n\nCette action est irréversible.")) return;
-  localStorage.removeItem(CLE);
-  acheteurs = []; lots = []; dossiers = [];
-  renderAll();
-  const el = document.getElementById("save-indicator");
-  if(el){ el.innerHTML = "🗑 Données effacées"; el.style.color = "#c0392b"; }
+  if(!confirm("⚠️ Effacer TOUTES les données ?\n\nCette action est irréversible.")) return;
+  localStorage.removeItem(CLE); acheteurs=[]; lots=[]; dossiers=[]; renderAll();
+  const el=document.getElementById("save-status"); if(el){ el.innerHTML="🗑 Données effacées"; el.style.color="#c0392b"; }
 }
 
-// ── Patch saveAcheteur / saveLot / saveDossier / deleteItem pour auto-save ──
-const _saveAcheteur_orig = saveAcheteur;
-const _saveLot_orig      = saveLot;
-const _saveDossier_orig  = saveDossier;
+// ── Google Drive ──
+let gdriveAccessToken=null;
+let gdriveConfig=(function(){ try{ return JSON.parse(localStorage.getItem('gdrive_config')||'{}'); }catch(e){ return {}; } })();
 
-saveAcheteur = function(){
-  const nom    = document.getElementById("f-nom").value.trim();
-  const prenom = document.getElementById("f-prenom").value.trim();
-  const cin    = document.getElementById("f-cin").value.trim();
-  if(!nom||!prenom||!cin){ alert("Veuillez remplir les champs obligatoires (*)"); return; }
-  const pieces = [...document.querySelectorAll(".piece-check.checked")].map(e=>e.dataset.p);
-  const obj = { nom, prenom, cin,
-    date_naissance: document.getElementById("f-dob").value,
-    telephone:      document.getElementById("f-tel").value.trim(),
-    email:          document.getElementById("f-email").value.trim(),
-    adresse:        document.getElementById("f-adr").value.trim(),
-    pieces,
-    attachments:    window._pendingAttachments || []
-  };
-  if(editMode){ Object.assign(acheteurs.find(x=>x.id===editMode.id), obj); }
-  else { acheteurs.push({ id:genId("A"), ...obj }); }
-  window._pendingAttachments = [];
-  closeModal(); renderAll(); sauvegarder();
-};
-
-saveLot = function(){
-  const obj = {
-    numero_lot:  document.getElementById("f-lot").value.trim(),
-    ilot:        document.getElementById("f-ilot").value.trim(),
-    superficie:  Number(document.getElementById("f-sup").value),
-    zone:        document.getElementById("f-zone").value.trim(),
-    utilisation: document.getElementById("f-util").value,
-    statut:      document.getElementById("f-stat").value||"Disponible",
-    prix:        Number(document.getElementById("f-prix-lot").value)||0,
-  };
-  if(!obj.numero_lot||!obj.ilot||!obj.superficie){ alert("Veuillez remplir les champs obligatoires (*)"); return; }
-  if(editMode){ Object.assign(lots.find(x=>x.id===editMode.id), obj); }
-  else { lots.push({ id:genId("L"), ...obj }); }
-  closeModal(); renderAll(); sauvegarder();
-};
-
-saveDossier = function(){
-  const obj = {
-    acheteur_id:      document.getElementById("f-achet").value,
-    lot_id:           document.getElementById("f-lotid").value,
-    date_attribution: document.getElementById("f-date").value,
-    prix:             Number(document.getElementById("f-prix").value)||"",
-    notes:            document.getElementById("f-notes").value.trim(),
-  };
-  if(!obj.acheteur_id||!obj.lot_id){ alert("Veuillez sélectionner un acheteur et un lot"); return; }
-  const lot = lots.find(x=>x.id===obj.lot_id);
-  if(lot) lot.statut="Vendu";
-  if(editMode){ Object.assign(dossiers.find(x=>x.id===editMode.id), obj); }
-  else { dossiers.push({ id:genId("D"), ...obj }); }
-  closeModal(); renderAll(); sauvegarder();
-};
-
-deleteItem = function(type,id){
-  if(!confirm("Confirmer la suppression ?")) return;
-  if(type==="acheteur") acheteurs = acheteurs.filter(x=>x.id!==id);
-  if(type==="lot")      lots      = lots.filter(x=>x.id!==id);
-  if(type==="dossier")  dossiers  = dossiers.filter(x=>x.id!==id);
-  renderAll(); sauvegarder();
-};
-
-// ── Init ──────────────────────────────────────────────────────
-const derniereSauvegarde = chargerDonnees();
-renderAll();
-
-setTimeout(()=>{
-  const el = document.getElementById("save-indicator");
-  if(!el) return;
-  if(derniereSauvegarde){
-    const d = new Date(derniereSauvegarde);
-    el.innerHTML = "✅ Données restaurées — dernière sauvegarde : <b>" + d.toLocaleString("fr-FR") + "</b>";
-    el.style.color = "#2d7a3a";
-  } else {
-    el.innerHTML = "💾 Données sauvegardées automatiquement à chaque modification";
-    el.style.color = "#888";
-  }
-}, 80);
-
-// ══════════════════════════════════════════════════════════════
-// SAUVEGARDE GOOGLE DRIVE
-// ══════════════════════════════════════════════════════════════
-let gdriveAccessToken = null;
-let gdriveConfig = (function(){
-  try { return JSON.parse(localStorage.getItem('gdrive_config')||'{}'); } catch(e){ return {}; }
-})();
-
-// Mettre à jour le statut initial si config existante
-(function(){
-  const st = document.getElementById('gdrive-status');
-  if(st && gdriveConfig.clientId){ st.textContent = "Configuration chargée — prêt à connecter"; st.style.color="#1a73e8"; }
-})();
-
-function toggleGdriveConfig(){
-  const panel = document.getElementById('gdrive-config-panel');
-  panel.style.display = panel.style.display === 'none' || panel.style.display === '' ? 'block' : 'none';
-  if(panel.style.display === 'block'){
-    document.getElementById('gdrive-client-id').value = gdriveConfig.clientId || '';
-    document.getElementById('gdrive-api-key').value   = gdriveConfig.apiKey   || '';
-  }
-}
-
-function saveGdriveConfig(){
-  gdriveConfig.clientId = document.getElementById('gdrive-client-id').value.trim();
-  gdriveConfig.apiKey   = document.getElementById('gdrive-api-key').value.trim();
-  localStorage.setItem('gdrive_config', JSON.stringify(gdriveConfig));
-  document.getElementById('gdrive-config-panel').style.display = 'none';
-  gdriveAccessToken = null; // reset token si config change
-  const st = document.getElementById('gdrive-status');
-  st.textContent = "✅ Configuration enregistrée — cliquez sur « Sauvegarder sur Drive »";
-  st.style.color = "#2d7a3a";
-}
+function toggleGdriveConfig(){ const panel=document.getElementById('gdrive-config-panel'); panel.style.display=panel.style.display==='none'||panel.style.display===''?'block':'none'; if(panel.style.display==='block'){ document.getElementById('gdrive-client-id').value=gdriveConfig.clientId||''; document.getElementById('gdrive-api-key').value=gdriveConfig.apiKey||''; } }
+function saveGdriveConfig(){ gdriveConfig.clientId=document.getElementById('gdrive-client-id').value.trim(); gdriveConfig.apiKey=document.getElementById('gdrive-api-key').value.trim(); localStorage.setItem('gdrive_config',JSON.stringify(gdriveConfig)); document.getElementById('gdrive-config-panel').style.display='none'; gdriveAccessToken=null; const st=document.getElementById('gdrive-status'); st.textContent="✅ Configuration enregistrée"; st.style.color="#2d7a3a"; }
 
 function gdriveBackup(){
-  const st = document.getElementById('gdrive-status');
-  if(!gdriveConfig.clientId){
-    st.textContent = "⚠️ Configurez d'abord votre Client ID (bouton ⚙️ Config API)";
-    st.style.color = "#c0392b";
-    toggleGdriveConfig();
-    return;
-  }
-  // Charge Google Identity Services si pas encore présent
-  if(!window.google || !window.google.accounts){
-    st.textContent = "⏳ Chargement Google Identity Services...";
-    st.style.color = "#1a73e8";
-    const script = document.createElement('script');
-    script.src = 'https://accounts.google.com/gsi/client';
-    script.onload  = () => requestGDriveToken();
-    script.onerror = () => { st.textContent = "❌ Impossible de charger Google Identity Services"; st.style.color="#c0392b"; };
-    document.head.appendChild(script);
-  } else if(gdriveAccessToken){
-    uploadToGDrive(gdriveAccessToken);
-  } else {
-    requestGDriveToken();
-  }
+  const st=document.getElementById('gdrive-status');
+  if(!gdriveConfig.clientId){ st.textContent="⚠️ Configurez d'abord votre Client ID"; st.style.color="#c0392b"; toggleGdriveConfig(); return; }
+  if(!window.google||!window.google.accounts){ st.textContent="⏳ Chargement..."; const script=document.createElement('script'); script.src='https://accounts.google.com/gsi/client'; script.onload=()=>requestGDriveToken(); script.onerror=()=>{ st.textContent="❌ Impossible de charger Google Identity Services"; st.style.color="#c0392b"; }; document.head.appendChild(script); }
+  else if(gdriveAccessToken) uploadToGDrive(gdriveAccessToken);
+  else requestGDriveToken();
 }
 
 function requestGDriveToken(){
-  const st = document.getElementById('gdrive-status');
-  try {
-    const tokenClient = google.accounts.oauth2.initTokenClient({
-      client_id: gdriveConfig.clientId,
-      scope: 'https://www.googleapis.com/auth/drive.file',
-      callback: function(resp){
-        if(resp && resp.access_token){
-          gdriveAccessToken = resp.access_token;
-          uploadToGDrive(resp.access_token);
-        } else {
-          st.textContent = "❌ Connexion annulée ou refusée";
-          st.style.color = "#c0392b";
-        }
-      }
-    });
-    tokenClient.requestAccessToken({ prompt: gdriveAccessToken ? '' : 'consent' });
-  } catch(e){
-    st.textContent = "❌ Erreur : " + e.message;
-    st.style.color = "#c0392b";
-  }
+  const st=document.getElementById('gdrive-status');
+  try{ const tokenClient=google.accounts.oauth2.initTokenClient({client_id:gdriveConfig.clientId,scope:'https://www.googleapis.com/auth/drive.file',callback:function(resp){ if(resp&&resp.access_token){ gdriveAccessToken=resp.access_token; uploadToGDrive(resp.access_token); } else { st.textContent="❌ Connexion annulée"; st.style.color="#c0392b"; } }}); tokenClient.requestAccessToken({prompt:gdriveAccessToken?'':'consent'}); }
+  catch(e){ st.textContent="❌ Erreur : "+e.message; st.style.color="#c0392b"; }
 }
 
 async function uploadToGDrive(token){
-  const st = document.getElementById('gdrive-status');
-  st.textContent = "⏳ Upload en cours vers Google Drive...";
-  st.style.color = "#1a73e8";
-  try {
-    const data = JSON.stringify({ acheteurs, lots, dossiers, savedAt: new Date().toISOString() }, null, 2);
-    const today = new Date().toISOString().slice(0,10);
-    const filename = "Guide_Lotissement_MANKONO_" + today + ".json";
-    const boundary = "gdrive_boundary_" + Date.now();
-    const meta = JSON.stringify({ name: filename, mimeType: "application/json" });
-    const body = "--" + boundary + "\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n" + meta
-               + "\r\n--" + boundary + "\r\nContent-Type: application/json\r\n\r\n" + data
-               + "\r\n--" + boundary + "--";
-    const resp = await fetch("https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart", {
-      method: "POST",
-      headers: {
-        "Authorization": "Bearer " + token,
-        "Content-Type": "multipart/related; boundary=\"" + boundary + "\""
-      },
-      body: body
-    });
-    if(resp.ok){
-      const file = await resp.json();
-      const now = new Date().toLocaleTimeString("fr-FR", { hour:"2-digit", minute:"2-digit" });
-      st.innerHTML = "✅ Sauvegardé sur Google Drive : <b>" + filename + "</b> à " + now;
-      st.style.color = "#2d7a3a";
-    } else {
-      const err = await resp.json().catch(()=>({}));
-      if(resp.status === 401){ gdriveAccessToken = null; }
-      st.textContent = "❌ Erreur Drive (" + resp.status + ") : " + (err.error?.message || "Réessayez");
-      st.style.color = "#c0392b";
-    }
-  } catch(e){
-    st.textContent = "❌ " + e.message;
-    st.style.color = "#c0392b";
-    gdriveAccessToken = null;
-  }
+  const st=document.getElementById('gdrive-status');
+  st.textContent="⏳ Upload..."; st.style.color="#1a73e8";
+  try{
+    const data=JSON.stringify({acheteurs,lots,dossiers,savedAt:new Date().toISOString()},null,2);
+    const today=new Date().toISOString().slice(0,10);
+    const filename="Guide_Lotissement_MANKONO_"+today+".json";
+    const boundary="gdrive_boundary_"+Date.now();
+    const meta=JSON.stringify({name:filename,mimeType:"application/json"});
+    const body="--"+boundary+"\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n"+meta+"\r\n--"+boundary+"\r\nContent-Type: application/json\r\n\r\n"+data+"\r\n--"+boundary+"--";
+    const resp=await fetch("https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",{method:"POST",headers:{"Authorization":"Bearer "+token,"Content-Type":"multipart/related; boundary=\""+boundary+"\""},body:body});
+    if(resp.ok){ const now=new Date().toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"}); st.innerHTML="✅ Sauvegardé sur Drive : <b>"+filename+"</b> à "+now; st.style.color="#2d7a3a"; }
+    else{ const err=await resp.json().catch(()=>({})); if(resp.status===401) gdriveAccessToken=null; st.textContent="❌ Erreur Drive ("+resp.status+")"; st.style.color="#c0392b"; }
+  }catch(e){ st.textContent="❌ "+e.message; st.style.color="#c0392b"; gdriveAccessToken=null; }
 }
 
 function gdriveRestore(){
-  const st = document.getElementById('gdrive-status');
-  const input = document.createElement('input');
-  input.type = 'file';
-  input.accept = '.json';
-  input.onchange = function(e){
-    const file = e.target.files[0];
-    if(!file) return;
-    const reader = new FileReader();
-    reader.onload = function(ev){
-      try {
-        const data = JSON.parse(ev.target.result);
-        const dateStr = data.savedAt ? new Date(data.savedAt).toLocaleString("fr-FR") : "date inconnue";
-        if(!confirm("📥 Restaurer les données du fichier ?\n\nDernière sauvegarde : " + dateStr + "\n\n⚠️ Cela remplacera TOUTES les données actuelles.")) return;
-        if(data.acheteurs) acheteurs = data.acheteurs;
-        if(data.lots)      lots      = data.lots;
-        if(data.dossiers)  dossiers  = data.dossiers;
-        renderAll();
-        sauvegarder();
-        st.innerHTML = "✅ Données restaurées depuis <b>" + file.name + "</b>";
-        st.style.color = "#2d7a3a";
-      } catch(err){
-        st.textContent = "❌ Fichier JSON invalide ou corrompu";
-        st.style.color = "#c0392b";
-      }
-    };
-    reader.readAsText(file);
-  };
+  const st=document.getElementById('gdrive-status');
+  const input=document.createElement('input'); input.type='file'; input.accept='.json';
+  input.onchange=function(e){ const file=e.target.files[0]; if(!file) return; const reader=new FileReader(); reader.onload=function(ev){ try{ const data=JSON.parse(ev.target.result); const dateStr=data.savedAt?new Date(data.savedAt).toLocaleString("fr-FR"):"date inconnue"; if(!confirm("📥 Restaurer ?\n\nDernière sauvegarde : "+dateStr+"\n\n⚠️ Cela remplacera toutes les données actuelles.")) return; if(data.acheteurs) acheteurs=data.acheteurs; if(data.lots) lots=data.lots; if(data.dossiers) dossiers=data.dossiers; renderAll(); sauvegarder(); st.innerHTML="✅ Données restaurées depuis <b>"+file.name+"</b>"; st.style.color="#2d7a3a"; }catch(err){ st.textContent="❌ Fichier JSON invalide"; st.style.color="#c0392b"; } }; reader.readAsText(file); };
   input.click();
 }
+
+// ── Init ──
+const derniereSauvegarde=chargerDonnees();
+renderAll();
+setTimeout(()=>{
+  const el=document.getElementById("save-status");
+  if(!el) return;
+  if(derniereSauvegarde){ const d=new Date(derniereSauvegarde); el.innerHTML="✅ Restauré — dernière sauveg. : <b>"+d.toLocaleString("fr-FR")+"</b>"; el.style.color="#2d7a3a"; }
+  else { el.innerHTML="💾 Sauvegarde auto à chaque modification"; el.style.color="#888"; }
+},80);
 </script>
 </body>
 </html>
